@@ -1,0 +1,4595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="author" content="" />
+
+
+
+<title>GorCastStudio</title>
+
+<meta property="og:title" content="GorCastStudio" />
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+<link rel="icon" href="data:image/x-icon;" type="image/x-icon">
+
+
+<script type="text/javascript">
+window.FlexDashboardComponents = [];
+</script>
+
+<script id="flexdashboard-navbar" type="application/json">
+[{"title":"Source Code","icon":"fa-github","href":"https://github.com/GorkyFlorez","align":"right"}]
+</script>
+<script src="index_files/header-attrs-2.30/header-attrs.js"></script>
+<script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="index_files/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<link href="index_files/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="index_files/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="index_files/value-box-accent-static-0.6.2/theme-flatly-value-box.css" rel="stylesheet" />
+<link href="index_files/flexdashboard-css-0.6.2/flexdashboard.min.css" rel="stylesheet" />
+<link href="index_files/flexdashboard-css-0.6.2/theme-flatly.css" rel="stylesheet" />
+<style type="text/css">
+/*
+  CSS for flexdashboard.js' use of Sly(). The sizing/position of this CSS needs to be
+  applied _before_ flexdashboard.js initializes, which is why this CSS has been pulled
+  out from flexdashboard.scss and inlined in the document's head.
+*/
+
+.storyboard-nav button {
+  background: transparent;
+  border: 0;
+  opacity: .3;
+  outline: none;
+  padding: 0;
+}
+
+.storyboard-nav button:hover,
+.storyboard-nav button:hover {
+  opacity: .5;
+}
+
+.storyboard-nav button:disabled,
+.storyboard-nav button:disabled {
+  opacity: .1;
+}
+
+.storyboard-nav .sbnext,
+.storyboard-nav .sbprev {
+  float: left;
+  width: 2%;
+  height: 120px;
+}
+
+.storyboard-nav .sbprev {
+  text-align: left;
+  width: 2%;
+}
+
+.storyboard-nav .sbnext {
+  float: right;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.storyboard-nav .sbframelist {
+  margin: 0 auto;
+  width: 94%;
+  height: 120px;
+  overflow: hidden;
+  text-shadow: none;
+  margin-bottom: 8px;
+}
+
+.storyboard-nav .sbframelist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.storyboard-nav .sbframelist ul li {
+  float: left;
+  width: 270px;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  margin-right: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.storyboard-nav .sbframelist ul li:last-child {
+  margin-right: 0px;
+}
+
+.sbframe-commentary {
+  width: 300px;
+}
+
+.sbframe-commentary ul {
+  padding-left: 22px;
+}
+
+.sbframe.active {
+  display: flex;
+}
+
+.sbframe:not(.active) {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+html, body {
+  height: 100%;
+}
+
+#dashboard-container {
+  height: 100%;
+}
+}
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+
+<span class="navbar-logo pull-left">
+  
+</span>
+<span class="navbar-brand">
+  GorCastStudio
+  <span class="navbar-author">
+        </span>
+</span>
+
+<button id="navbar-button" type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div><!--/.nav-collapse-->
+</div><!--/.container-->
+</div><!--/.navbar-->
+
+<script type="text/javascript">
+
+
+var FlexDashboard = (function () {
+
+  // initialize options
+  var _options = {};
+
+  var FlexDashboard = function() {
+
+    // default options
+    _options = $.extend(_options, {
+      theme: "cosmo",
+      fillPage: false,
+      orientation: 'columns',
+      storyboard: false,
+      defaultFigWidth: 576,
+      defaultFigHeight: 461,
+      defaultFigWidthMobile: 360,
+      defaultFigHeightMobile: 461,
+      isMobile: false,
+      isPortrait: false,
+      resize_reload: true
+    });
+  };
+
+  function init(options) {
+
+    // extend default options
+    $.extend(true, _options, options);
+
+    // add ids to sections that don't have them (pandoc won't assign ids
+    // to e.g. sections with titles consisting of only chinese characters)
+    var nextId = 1;
+    $('.level1:not([id]),.level2:not([id]),.level3:not([id])').each(function() {
+      $(this).attr('id', 'dashboard-' + nextId++);
+    });
+
+    // find navbar items
+    var navbarItems = $('#flexdashboard-navbar');
+    if (navbarItems.length)
+      navbarItems = JSON.parse(navbarItems.html());
+    addNavbarItems(navbarItems);
+
+    // find the main dashboard container
+    var dashboardContainer = $('#dashboard-container');
+
+    // resolve mobile classes
+    resolveMobileClasses(dashboardContainer);
+
+    // one time global initialization for components
+    componentsInit(dashboardContainer);
+
+    // look for a global sidebar
+    var globalSidebar = dashboardContainer.find(".section.level1.sidebar");
+    if (globalSidebar.length > 0) {
+
+      // global layout for fullscreen displays
+      if (!isMobilePhone()) {
+
+         // hoist it up to the top level
+         globalSidebar.insertBefore(dashboardContainer);
+
+         // lay it out (set width/positions)
+         layoutSidebar(globalSidebar, dashboardContainer);
+
+      // tuck sidebar into first page for mobile phones
+      } else {
+
+        // convert it into a level3 section
+        globalSidebar.removeClass('sidebar');
+        globalSidebar.removeClass('level1');
+        globalSidebar.addClass('level3');
+        var h1 = globalSidebar.children('h1');
+        var h3 = $('<h3></h3>');
+        h3.append(h1.contents());
+        h3.insertBefore(h1);
+        h1.detach();
+
+        // move it into the first page
+        var page = dashboardContainer.find('.section.level1').first();
+        if (page.length > 0)
+          page.prepend(globalSidebar);
+      }
+    }
+
+    // look for pages to layout
+    var pages = $('div.section.level1');
+    if (pages.length > 0) {
+
+        // find the navbar and collapse on clicked
+        var navbar = $('#navbar');
+        navbar.on("click", "a[data-toggle!=dropdown]", null, function () {
+           navbar.collapse('hide');
+        });
+
+        // envelop the dashboard container in a tab content div
+        dashboardContainer.wrapInner('<div class="tab-content"></div>');
+
+        pages.each(function(index) {
+
+          // lay it out
+          layoutDashboardPage($(this));
+
+          // add it to the navbar
+          addToNavbar($(this), index === 0);
+
+        });
+
+    } else {
+
+      // remove the navbar and navbar button if we don't
+      // have any navbuttons
+      if (navbarItems.length === 0) {
+        $('#navbar').remove();
+        $('#navbar-button').remove();
+      }
+
+      // add the storyboard class if requested
+      if (_options.storyboard)
+        dashboardContainer.addClass('storyboard');
+
+      // layout the entire page
+      layoutDashboardPage(dashboardContainer);
+    }
+
+    // if we are in shiny we need to trigger a window resize event to
+    // force correct layout of shiny-bound-output elements
+    if (isShinyDoc())
+      $(window).trigger('resize');
+
+    // make main components visible
+    $('.section.sidebar').css('visibility', 'visible');
+    dashboardContainer.css('visibility', 'visible');
+
+    // handle location hash
+    handleLocationHash();
+
+    // intialize prism highlighting
+    initPrismHighlighting();
+
+    // record mobile and orientation state then register a handler
+    // to refresh if resize_reload is set to true and it changes
+    _options.isMobile = isMobilePhone();
+    _options.isPortrait = isPortrait();
+    if (_options.resize_reload) {
+      $(window).on('resize', function() {
+        if (_options.isMobile !== isMobilePhone() ||
+            _options.isPortrait !== isPortrait()) {
+          window.location.reload();
+        }
+      });
+    } else {
+      // if in desktop mode and resizing to mobile, make sure the heights are 100%
+      // This enforces what `fillpage.css` does for "wider" pages.
+      // Since we are not reloading once the page becomes small, we need to force the height to 100%
+      // This is a new situation introduced when `_options.resize_reload` is `false`
+      if (! _options.isMobile) {
+        // only add if `fillpage.css` was added in the first place
+        if (_options.fillPage) {
+          // fillpage.css
+          $("html,body,#dashboard").css("height", "100%");
+        }
+      }
+    }
+    // trigger layoutcomplete event
+    dashboardContainer.trigger('flexdashboard:layoutcomplete');
+  }
+
+  function resolveMobileClasses(dashboardContainer) {
+     // add top level layout class
+    dashboardContainer.addClass(isMobilePhone() ? 'mobile-layout' :
+                                                  'desktop-layout');
+
+    // look for .mobile sections and add .no-mobile to their peers
+    var mobileSections = $('.section.mobile');
+    mobileSections.each(function() {
+       var id = $(this).attr('id');
+       var nomobileId = id.replace(/-\d+$/, '');
+       $('#' + nomobileId).addClass('no-mobile');
+    });
+  }
+
+  function addNavbarItems(navbarItems) {
+
+    var navbarLeft = $('ul.navbar-left');
+    var navbarRight = $('ul.navbar-right');
+
+    for (var i = 0; i<navbarItems.length; i++) {
+
+      // get the item
+      var item = navbarItems[i];
+
+      // determine the container
+      var container = null;
+      if (item.align === "left")
+        container = navbarLeft;
+      else
+        container = navbarRight;
+
+      // navbar menu if we have multiple items
+      if (item.items) {
+        var menu = navbarMenu(null, item.icon, item.title, container);
+        for (var j = 0; j<item.items.length; j++) {
+          var subItem = item.items[j];
+          var li = $('<li></li>');
+          var a = navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target);
+          a.removeClass("nav-link").addClass("dropdown-item");
+          li.append(a);
+          menu.append(li);
+        }
+      } else {
+        var li = $('<li class="nav-item"></li>');
+        li.append(navbarLink(item.icon, item.title, item.href, item.target));
+        container.append(li);
+      }
+    }
+  }
+
+  // create or get a reference to an existing dropdown menu
+  function navbarMenu(id, icon, title, container) {
+    var existingMenu = [];
+    if (id)
+      existingMenu = container.children('#' + id);
+    if (existingMenu.length > 0) {
+      return existingMenu.children('ul');
+    } else {
+      var li = $('<li class="nav-item"></li>');
+      if (id)
+        li.attr('id', id);
+      li.addClass('dropdown');
+      // auto add "Share" title on mobile if necessary
+      if (!title && icon && (icon === "fa-share-alt") && isMobilePhone())
+        title = "Share";
+      if (title) {
+        title = title + ' <span class="caret"></span>';
+      }
+      var a = navbarLink(icon, title, "#");
+      a.addClass('dropdown-toggle');
+      a.attr('data-toggle', 'dropdown');
+      a.attr('data-bs-toggle', 'dropdown');
+      a.attr('role', 'button');
+      a.attr('aria-expanded', 'false');
+      li.append(a);
+      var ul = $('<ul class="dropdown-menu"></ul>');
+      ul.attr('role', 'menu');
+      li.append(ul);
+      container.append(li);
+      return ul;
+    }
+  }
+
+  function addToNavbar(page, active) {
+
+    // capture the id and data-icon attribute (if any)
+    var id = page.attr('id');
+    var icon = page.attr('data-icon');
+    var navmenu = page.attr('data-navmenu');
+    var navmenuIcon = page.attr('data-navmenu-icon');
+
+    // get hidden state (transfer this to navbar)
+    var hidden = page.hasClass('hidden');
+    page.removeClass('hidden');
+
+    // sanitize the id for use with bootstrap tabs
+    id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+    page.attr('id', id);
+
+    // get the wrapper
+    var wrapper = page.closest('.dashboard-page-wrapper');
+
+    // move the id to the wrapper
+    page.removeAttr('id');
+    wrapper.attr('id', id);
+
+    // add the tab-pane class to the wrapper
+    wrapper.addClass('tab-pane');
+
+    // get a reference to the h1, discover its inner contens, then detach it
+    var h1 = wrapper.find('h1').first();
+    var title = h1.contents();
+    h1.detach();
+
+    // create a navbar item
+    var li = $('<li></li>');
+    var a = navbarLink(icon, title, '#' + id);
+    a.attr('data-toggle', 'tab');
+    a.attr('data-bs-toggle', 'tab');
+    li.append(a);
+
+    // add it to the navbar (or navbar menu if specified)
+    var container = $('ul.navbar-left');
+    if (navmenu) {
+      var menuId = navmenu.replace(/\s+/g, '');
+      var menu = navbarMenu(menuId, navmenuIcon, navmenu, container);
+      li.find("> a").removeClass("nav-link").addClass("dropdown-item");
+      menu.append(li);
+    } else {
+      li.addClass("nav-item")
+      container.append(li);
+    }
+
+    // mark active tab and corresponding nav menu item
+    if (active)
+      $(a).tab("show");
+
+    // hide it if requested
+    if (hidden)
+      li.addClass('hidden');
+  }
+
+  function navbarLink(icon, title, href, target) {
+
+    var a = $('<a class="nav-link"></a>');
+    if (icon) {
+
+      // get the name of the icon set and icon
+      var dashPos = icon.indexOf("-");
+      var iconSet = null;
+      var iconSplit = icon.split(" ");
+      if (iconSplit.length > 1) {
+        iconSet = iconSplit[0];
+        icon = iconSplit.slice(1).join(" ");
+      } else {
+        iconSet = icon.substring(0, dashPos);
+      }
+      var iconName = icon.substring(dashPos + 1);
+
+      // create the icon
+      var iconElement = $('<span class="' + iconSet + ' ' + icon + '"></span>');
+      if (title)
+        iconElement.css('margin-right', '7px');
+      a.append(iconElement);
+      // if href is null see if we can auto-generate based on icon (e.g. social)
+      if (!href)
+        maybeGenerateLinkFromIcon(iconName, a);
+    }
+    if (title)
+      a.append(title);
+
+    // add the href.
+    if (href) {
+      if (href === "source_embed") {
+        a.attr('href', '#');
+        a.attr('data-featherlight', "#flexdashboard-source-code");
+        a.featherlight({
+            beforeOpen: function(event){
+              $('body').addClass('unselectable');
+            },
+            afterClose: function(event){
+              $('body').removeClass('unselectable');
+            }
+        });
+      } else {
+        a.attr('href', href);
+      }
+    }
+
+    // add the arget
+    if (target)
+      a.attr('target', target);
+
+    return a;
+  }
+
+  // auto generate a link from an icon name (e.g. twitter) when possible
+  function maybeGenerateLinkFromIcon(iconName, a) {
+
+     var serviceLinks = {
+      "twitter": "https://twitter.com/share?text=" + encodeURIComponent(document.title) + "&url="+encodeURIComponent(location.href),
+      "facebook": "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(location.href),
+      "linkedin": "https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(location.href) + "&title=" + encodeURIComponent(document.title),
+      "pinterest": "https://pinterest.com/pin/create/link/?url="+encodeURIComponent(location.href) + "&description=" + encodeURIComponent(document.title)
+    };
+
+    var makeSocialLink = function(a, href) {
+      a.attr('href', '#');
+      a.on('click', function(e) {
+        e.preventDefault();
+        window.open(href);
+      });
+    };
+
+    $.each(serviceLinks, function(key, value) {
+      if (iconName.indexOf(key) !== -1)
+        makeSocialLink(a, value);
+    });
+  }
+
+  // layout a dashboard page
+  function layoutDashboardPage(page) {
+
+    // use a page wrapper so that free form content above the
+    // dashboard appears at the top rather than the side (as it
+    // would without the wrapper in a column orientation)
+    var wrapper = $('<div class="dashboard-page-wrapper"></div>');
+    page.wrap(wrapper);
+
+    // if there are no level2 or level3 headers synthesize a level3
+    // header to contain the (e.g. frame it, scroll container, etc.)
+    var headers = page.find('h2,h3');
+    if (headers.length === 0)
+      page.wrapInner('<div class="section level3"></div>');
+
+    // hoist up any content before level 2 or level 3 headers
+    var children = page.children();
+    children.each(function(index) {
+      if ($(this).hasClass('level2') || $(this).hasClass('level3'))
+        return false;
+      $(this).insertBefore(page);
+    });
+
+    // determine orientation and fillPage behavior for distinct media
+    var orientation, fillPage, storyboard;
+
+    // media: mobile phone
+    if (isMobilePhone()) {
+
+      // if there is a sidebar we need to ensure it's content
+      // is properly framed as an h3
+      var sidebar = page.find('.section.sidebar');
+      sidebar.removeClass('sidebar');
+      sidebar.wrapInner('<div class="section level3"></div>');
+      var h2 = sidebar.find('h2');
+      var h3 = $('<h3></h3>');
+      h3.append(h2.contents());
+      h3.insertBefore(h2);
+      h2.detach();
+
+      // wipeout h2 elements then enclose them in a single h2
+      var level2 = page.find('div.section.level2');
+      level2.each(function() {
+        level2.children('h2').remove();
+        level2.children().unwrap();
+      });
+      page.wrapInner('<div class="section level2"></div>');
+
+      // substitute mobile images
+      if (isPortrait()) {
+        var mobileFigures = $('img.mobile-figure');
+        mobileFigures.each(function() {
+          // get the src (might be base64 encoded)
+          var src = $(this).attr('src');
+
+          // find it's peer
+          var id = $(this).attr('data-mobile-figure-id');
+          var img = $('img[data-figure-id=' + id + "]");
+          img.attr('src', src)
+             .attr('width', _options.defaultFigWidthMobile)
+             .attr('height', _options.defaultFigHeightMobile);
+        });
+      }
+
+      // hoist storyboard commentary into it's own section
+      if (page.hasClass('storyboard')) {
+        var commentaryHR = page.find('div.section.level3 hr');
+        commentaryHR.each(function() {
+          var commentary = $(this).nextAll().detach();
+          var commentarySection = $('<div class="section level3"></div>');
+          commentarySection.append(commentary);
+          commentarySection.insertAfter($(this).closest('div.section.level3'));
+          $(this).remove();
+        });
+      }
+
+      // force a non full screen layout by columns
+      orientation = _options.orientation = 'columns';
+      fillPage = _options.fillPage = false;
+      storyboard = _options.storyboard = false;
+
+    // media: desktop
+    } else {
+
+      // determine orientation
+      orientation = page.attr('data-orientation');
+      if (orientation !== 'rows' && orientation != 'columns')
+        orientation = _options.orientation;
+
+      // determine storyboard mode
+      storyboard = page.hasClass('storyboard');
+
+      // fillPage based on options (force for storyboard)
+      fillPage = _options.fillPage || storyboard;
+
+      // handle sidebar
+      var sidebar = page.find('.section.level2.sidebar');
+      if (sidebar.length > 0)
+        layoutSidebar(sidebar, page);
+    }
+
+    // give it and it's parent divs height: 100% if we are in fillPage mode
+    if (fillPage) {
+      page.addClass('vertical-layout-fill');
+      page.css('height', '100%');
+      page.parents('div').css('height', '100%');
+    } else {
+      page.addClass('vertical-layout-scroll');
+    }
+
+    // perform the layout
+    if (storyboard)
+      layoutPageAsStoryboard(page);
+    else if (orientation === 'rows')
+      layoutPageByRows(page, fillPage);
+    else if (orientation === 'columns')
+      layoutPageByColumns(page, fillPage);
+  }
+
+  function layoutSidebar(sidebar, content) {
+
+    // get it out of the header hierarchy
+    sidebar = sidebar.first();
+    if (sidebar.hasClass('level1')) {
+      sidebar.removeClass('level1');
+      sidebar.children('h1').remove();
+    } else if (sidebar.hasClass('level2')) {
+      sidebar.removeClass('level2');
+      sidebar.children('h2').remove();
+    }
+
+    // determine width
+    var sidebarWidth = isTablet() ? 220 : 250;
+    var dataWidth = parseInt(sidebar.attr('data-width'));
+    if (dataWidth)
+      sidebarWidth = dataWidth;
+
+    // set the width and shift the page right to accomodate the sidebar
+    sidebar.css('width', sidebarWidth + 'px');
+    content.css('padding-left', sidebarWidth + 'px');
+
+    // wrap it's contents in a form
+    sidebar.wrapInner($('<form></form>'));
+  }
+
+  function layoutPageAsStoryboard(page) {
+
+    // create storyboard navigation
+    var nav = $('<div class="storyboard-nav"></div>');
+
+    // add navigation buttons
+    var prev = $('<button class="sbprev"><i class="fa fa-angle-left"></i></button>');
+    nav.append(prev);
+    var next= $('<button class="sbnext"><i class="fa fa-angle-right"></i></button>');
+    nav.append(next);
+
+    // add navigation frame
+    var frameList = $('<div class="sbframelist"></div>');
+    nav.append(frameList);
+    var ul = $('<ul></ul>');
+    frameList.append(ul);
+
+     // find all the level3 sections (those are the storyboard frames)
+    var frames = page.find('div.section.level3');
+    frames.each(function() {
+
+      // mark it
+      $(this).addClass('sbframe');
+
+      // divide it into chart content and (optional) commentary
+      $(this).addClass('dashboard-column-orientation');
+
+      // stuff the chart into it's own div w/ flex
+      $(this).wrapInner('<div class="sbframe-component"></div>');
+      setFlex($(this), 1);
+      var frame = $(this).children('.sbframe-component');
+
+      // extract the title from the h3
+      var li = $('<li></li>');
+      var h3 = frame.children('h3');
+      li.append(h3.contents());
+      h3.detach();
+      ul.append(li);
+
+      // extract commentary
+      var hr = frame.children('hr');
+      if (hr.length) {
+        var commentary = hr.nextAll().detach();
+        hr.remove();
+        var commentaryFrame = $('<div class="sbframe-commentary"></div>');
+        commentaryFrame.addClass('flowing-content-shim');
+        commentaryFrame.addClass('flowing-content-container');
+        commentaryFrame.append(commentary);
+        $(this).append(commentaryFrame);
+
+        // look for a data-commentary-width attribute
+        var commentaryWidth = $(this).attr('data-commentary-width');
+        if (commentaryWidth)
+          commentaryFrame.css('width', commentaryWidth + 'px');
+      }
+
+      // layout the chart (force flex)
+      var result = layoutChart(frame, true);
+
+      // ice the notes if there are none
+      if (!result.notes)
+        frame.find('.chart-notes').remove();
+
+      // set flex on chart
+      setFlex(frame, 1);
+    });
+
+    // create a div to hold all the frames
+    var frameContent = $('<div class="sbframe-content"></div>');
+    frameContent.addClass('dashboard-row-orientation');
+    frameContent.append(frames.detach());
+
+    // row orientation to stack nav and frame content
+    page.addClass('dashboard-row-orientation');
+    page.append(nav);
+    page.append(frameContent);
+    setFlex(frameContent, 1);
+
+    // initialize sly
+    var sly = new Sly(frameList, {
+    		horizontal: true,
+    		itemNav: 'basic',
+    		smart: true,
+    		activateOn: 'click',
+    		startAt: 0,
+    		scrollBy: 1,
+    		activatePageOn: 'click',
+    		speed: 200,
+    		moveBy: 600,
+    		dragHandle: true,
+    		dynamicHandle: true,
+    		clickBar: true,
+    		keyboardNavBy: 'items',
+    		next: next,
+    		prev: prev
+    	}).init();
+
+    // make first frame active
+    frames.removeClass('active');
+    frames.first().addClass('active');
+
+    // subscribe to frame changed events
+    sly.on('active', function (eventName, itemIndex) {
+      frames.removeClass('active');
+      frames.eq(itemIndex).addClass('active')
+                          .trigger('shown');
+    });
+  }
+
+  function layoutPageByRows(page, fillPage) {
+
+    // row orientation
+    page.addClass('dashboard-row-orientation');
+
+    // find all the level2 sections (those are the rows)
+    var rows = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (rows.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      rows = page.find('div.section.level2');
+    }
+
+    rows.each(function () {
+
+      // flags
+      var haveNotes = false;
+      var haveFlexHeight = true;
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // give it row layout semantics if it's not a tabset
+      if (!isTabset)
+        $(this).addClass('dashboard-row');
+
+      // find all of the level 3 subheads
+      var columns = $(this).find('div.section.level3');
+
+      // determine figureSizes sizes
+      var figureSizes = chartFigureSizes(columns);
+
+      // fixup the columns
+      columns.each(function(index) {
+
+        // layout the chart (force flex if we are in a tabset)
+        var result = layoutChart($(this), isTabset);
+
+        // update flexHeight state
+        if (!result.flex)
+          haveFlexHeight = false;
+
+        // update state
+        if (result.notes)
+          haveNotes = true;
+
+        // set the column flex based on the figure width
+        // (value boxes will just get the default figure width)
+        var chartWidth = figureSizes[index].width;
+        setFlex($(this), chartWidth + ' ' + chartWidth + ' 0px');
+
+      });
+
+      // remove empty chart note divs
+      if (isTabset)
+        $(this).find('.chart-notes').filter(function() {
+            return $(this).html() === "&nbsp;";
+        }).remove();
+      if (!haveNotes)
+        $(this).find('.chart-notes').remove();
+
+       // make it a flexbox row
+      if (haveFlexHeight)
+        $(this).addClass('dashboard-row-flex');
+
+      // now we can set the height on all the wrappers (based on maximum
+      // figure height + room for title and notes, or data-height on the
+      // container if specified). However, don't do this if there is
+      // no flex on any of the constituent columns
+      var flexHeight = null;
+      var dataHeight = parseInt($(this).attr('data-height'));
+      if (dataHeight)
+        flexHeight = adjustedHeight(dataHeight, columns.first());
+      else if (haveFlexHeight)
+        flexHeight = maxChartHeight(figureSizes, columns);
+      if (flexHeight) {
+        if (fillPage)
+          setFlex($(this), flexHeight + ' ' + flexHeight + ' 0px');
+        else {
+          $(this).css('height', flexHeight + 'px');
+          setFlex($(this), '0 0 ' + flexHeight + 'px');
+        }
+      }
+
+    });
+  }
+
+  function layoutPageByColumns(page, fillPage) {
+
+    // column orientation
+    page.addClass('dashboard-column-orientation');
+
+    // find all the level2 sections (those are the columns)
+    var columns = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (columns.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      columns = page.find('div.section.level2');
+    }
+
+    // layout each column
+    columns.each(function (index) {
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // make it a flexbox column
+      $(this).addClass('dashboard-column');
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // find all the h3 elements
+      var rows = $(this).find('div.section.level3');
+
+      // get the figure sizes for the rows
+      var figureSizes = chartFigureSizes(rows);
+
+      // column flex is the max row width (or data-width if specified)
+      var flexWidth;
+      var dataWidth = parseInt($(this).attr('data-width'));
+      if (dataWidth)
+        flexWidth = dataWidth;
+      else
+        flexWidth = maxChartWidth(figureSizes);
+      setFlex($(this), flexWidth + ' ' + flexWidth + ' 0px');
+
+      // layout each chart
+      rows.each(function(index) {
+
+        // perform the layout
+        var result = layoutChart($(this), false);
+
+        // ice the notes if there are none
+        if (!result.notes)
+          $(this).find('.chart-notes').remove();
+
+        // set flex height based on figHeight, then adjust
+        if (result.flex) {
+          var chartHeight = figureSizes[index].height;
+          chartHeight = adjustedHeight(chartHeight, $(this));
+          if (fillPage)
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' 0px');
+          else {
+            $(this).css('height', chartHeight + 'px');
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' ' + chartHeight + 'px');
+          }
+        }
+      });
+    });
+  }
+
+  function chartFigureSizes(charts) {
+
+    // sizes
+    var figureSizes = new Array(charts.length);
+
+    // check each chart
+    charts.each(function(index) {
+
+      // start with default
+      figureSizes[index] = {
+        width: _options.defaultFigWidth,
+        height: _options.defaultFigHeight
+      };
+
+      // look for data-height or data-width then knit options
+      var dataWidth = parseInt($(this).attr('data-width'));
+      var dataHeight = parseInt($(this).attr('data-height'));
+      var knitrOptions = $(this).find('.knitr-options:first');
+      var knitrWidth, knitrHeight;
+      if (knitrOptions) {
+        knitrWidth = parseInt(knitrOptions.attr('data-fig-width'));
+        knitrHeight =  parseInt(knitrOptions.attr('data-fig-height'));
+      }
+
+      // width
+      if (dataWidth)
+        figureSizes[index].width = dataWidth;
+      else if (knitrWidth)
+        figureSizes[index].width = knitrWidth;
+
+      // height
+      if (dataHeight)
+        figureSizes[index].height = dataHeight;
+      else if (knitrHeight)
+        figureSizes[index].height = knitrHeight;
+    });
+
+    // return sizes
+    return figureSizes;
+  }
+
+  function maxChartHeight(figureSizes, charts) {
+
+    // first compute the maximum height
+    var maxHeight = _options.defaultFigHeight;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].height > maxHeight)
+        maxHeight = figureSizes[i].height;
+
+    // now add offests for chart title and chart notes
+    if (charts.length)
+      maxHeight = adjustedHeight(maxHeight, charts.first());
+
+    return maxHeight;
+  }
+
+  function adjustedHeight(height, chart) {
+    if (chart.length > 0) {
+      var chartTitle = chart.find('.chart-title');
+      if (chartTitle.length)
+        height += chartTitle.first().outerHeight();
+      var chartNotes = chart.find('.chart-notes');
+      if (chartNotes.length)
+        height += chartNotes.first().outerHeight();
+    }
+    return height;
+  }
+
+  function maxChartWidth(figureSizes) {
+    var maxWidth = _options.defaultFigWidth;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].width > maxWidth)
+        maxWidth = figureSizes[i].width;
+    return maxWidth;
+  }
+
+  // layout a chart
+  function layoutChart(chart, forceFlex) {
+
+    // state to return
+    var result = {
+      notes: false,
+      flex: false
+    };
+
+    // extract the title
+    var title = extractTitle(chart);
+
+    // find components that apply to this container
+    var components = componentsFind(chart);
+
+    // if it's a custom component then call it and return
+    var customComponents = componentsCustom(components);
+    if (customComponents.length) {
+      componentsLayout(customComponents, title, chart);
+      result.notes = false;
+      result.flex = forceFlex || componentsFlex(customComponents);
+      return result;
+    }
+
+    // put all the content in a chart wrapper div
+    chart.addClass('chart-wrapper');
+    chart.wrapInner('<div class="chart-stage"></div>');
+    var chartContent = chart.children('.chart-stage');
+
+    // flex the content if appropriate
+    result.flex = forceFlex || componentsFlex(components);
+    if (result.flex) {
+      // add flex classes
+      chart.addClass('chart-wrapper-flex');
+      chartContent.addClass('chart-stage-flex');
+
+      // additional shim to break out of flexbox sizing
+      chartContent.wrapInner('<div class="chart-shim"></div>');
+      chartContent = chartContent.children('.chart-shim');
+    }
+
+    // set custom data-padding attribute
+    var pad = chart.attr('data-padding');
+    if (pad) {
+      if (pad === "0")
+        chart.addClass('no-padding');
+      else {
+        pad = pad + 'px';
+        chartContent.css('left', pad)
+                    .css('top', pad)
+                    .css('right', pad)
+                    .css('bottom', pad)
+      }
+    }
+
+    // call compoents
+    componentsLayout(components, title, chartContent);
+
+    // also activate components on shiny output
+    findShinyOutput(chartContent).on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+
+          // see if we opted out of flex based on our output (for shiny
+          // we can't tell what type of output we have until after the
+          // value is bound)
+          var components = componentsFind(element);
+          var flex = forceFlex || componentsFlex(components);
+          if (!flex) {
+            chart.css('height', "");
+            setFlex(chart, "");
+            chart.removeClass('chart-wrapper-flex');
+            chartContent.removeClass('chart-stage-flex');
+            chartContent.children().unwrap();
+          }
+
+          // perform layout
+          componentsLayout(components, title, element.parent());
+        }, 10);
+      });
+
+    // add the title
+    var chartTitle = $('<div class="chart-title"></div>');
+    chartTitle.append(title);
+    chart.prepend(chartTitle);
+
+    // add the notes section
+    var chartNotes = $('<div class="chart-notes"></div>');
+    chartNotes.html('&nbsp;');
+    chart.append(chartNotes);
+
+    // attempt to extract notes if we have a component
+    if (components.length)
+      result.notes = extractChartNotes(chartContent, chartNotes);
+
+    // return result
+    return result;
+  }
+
+  // build a tabset from a section div with the .tabset class
+  function layoutTabset(tabset) {
+
+    // check for fade option
+    var fade = tabset.hasClass("tabset-fade");
+    var pills = tabset.hasClass("tabset-pills");
+    var navClass = pills ? "nav-pills" : "nav-tabs";
+
+    // determine the heading level of the tabset and tabs
+    var match = tabset.attr('class').match(/level(\d) /);
+    if (match === null)
+      return;
+    var tabsetLevel = Number(match[1]);
+    var tabLevel = tabsetLevel + 1;
+
+    // find all subheadings immediately below
+    var tabs = tabset.find("div.section.level" + tabLevel);
+    if (!tabs.length)
+      return;
+
+    // create tablist and tab-content elements
+    var tabList = $('<ul class="nav ' + navClass + '" role="tablist"></ul>');
+    $(tabs[0]).before(tabList);
+    var tabContent = $('<div class="tab-content"></div>');
+    $(tabs[0]).before(tabContent);
+
+    // build the tabset
+    var activeTab = 0;
+    tabs.each(function(i) {
+
+      // get the tab div
+      var tab = $(tabs[i]);
+
+      // get the id then sanitize it for use with bootstrap tabs
+      var id = tab.attr('id');
+
+      // see if this is marked as the active tab
+      if (tab.hasClass('active'))
+        activeTab = i;
+
+      // sanitize the id for use with bootstrap tabs
+      id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+      tab.attr('id', id);
+
+      // get the heading element within it and grab it's text
+      var heading = tab.find('h' + tabLevel + ':first');
+      var headingDom = heading.contents();
+
+      // build and append the tab list item
+      var a = $('<a role="tab" data-toggle="tab" data-bs-toggle="tab" class="nav-link"></a>');
+      a.append(headingDom);
+      a.attr('href', '#' + id);
+      a.attr('aria-controls', id);
+      var li = $('<li role="presentation" class="nav-item"></li>');
+      li.append(a);
+      tabList.append(li);
+
+      // set it's attributes
+      tab.attr('role', 'tabpanel');
+      tab.addClass('tab-pane');
+      tab.addClass('tabbed-pane');
+      tab.addClass('no-title');
+      if (fade)
+        tab.addClass('fade');
+
+      // move it into the tab content div
+      tab.detach().appendTo(tabContent);
+    });
+
+    // set active tab
+    $(tabList.children()[activeTab]).tab("show");
+    var active = $(tabContent.children('div.section')[activeTab]);
+    active.addClass('active');
+    if (fade)
+      active.addClass('in');
+
+    // add nav-tabs-custom
+    tabset.addClass('nav-tabs-custom');
+
+    // internal layout is dashboard-column with tab-content flexing
+    tabset.addClass('dashboard-column');
+    setFlex(tabContent, 1);
+  }
+
+  // one time global initialization for components
+  function componentsInit(dashboardContainer) {
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.init)
+        component.init(dashboardContainer);
+    }
+  }
+
+  // find components that apply within a container
+  function componentsFind(container) {
+
+    // look for components
+    var components = [];
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.find(container).length)
+        components.push(component);
+    }
+
+    // if there were none then use a special flowing content component
+    // that just adds a scrollbar in fillPage mode
+    if (components.length == 0) {
+      components.push({
+        find: function(container) {
+          return container;
+        },
+
+        flex: function(fillPage) {
+          return fillPage;
+        },
+
+        layout: function(title, container, element, fillPage) {
+          if (fillPage) {
+            container.addClass('flowing-content-shim');
+            container.addClass('flowing-content-container');
+          }
+        }
+      });
+    }
+
+    return components;
+  }
+
+  // if there is a custom component then pick it out
+  function componentsCustom(components) {
+    var customComponent = [];
+    for (var i=0; i<components.length; i++)
+      if (components[i].type === "custom") {
+        customComponent.push(components[i]);
+        break;
+      }
+    return customComponent;
+  }
+
+  // query all components for flex
+  function componentsFlex(components) {
+
+    // no components at all means no flex
+    if (components.length === 0)
+      return false;
+
+    // otherwise query components (assume true unless we see false)
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++)
+      if (components[i].flex && !components[i].flex(_options.fillPage))
+        return false;
+    return true;
+  }
+
+  // layout all components
+  function componentsLayout(components, title, container) {
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++) {
+      var element = components[i].find(container);
+      if (components[i].layout) {
+        // call layout (don't call other components if it returns false)
+        var result = components[i].layout(title, container, element, _options.fillPage);
+        if (result === false)
+          return;
+      }
+    }
+  }
+
+  // get a reference to the h3, discover it's inner html, and remove it
+  function extractTitle(container) {
+    var h3 = container.children('h3').first();
+    var title = '';
+    if (!container.hasClass('no-title'))
+      title = h3.contents();
+    h3.detach();
+    return title;
+  }
+
+  // extract chart notes
+  function extractChartNotes(chartContent, chartNotes) {
+    // look for a terminating blockquote or image caption
+    var blockquote = chartContent.children('blockquote:last-child');
+    var caption = chartContent.children('div.image-container')
+                              .children('p.caption');
+    if (blockquote.length) {
+      chartNotes.empty().append(blockquote.children('p:first-child').contents());
+      blockquote.remove();
+      return true;
+    } else if (caption.length) {
+      chartNotes.empty().append(caption.contents());
+      caption.remove();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function findShinyOutput(chartContent) {
+    return chartContent.find('.shiny-text-output, .shiny-html-output');
+  }
+
+  // safely detect rendering on a mobile phone
+  function isMobilePhone() {
+    try
+    {
+      return ! window.matchMedia("only screen and (min-width: 768px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  function isFillPage() {
+    return _options.fillPage;
+  }
+
+  // detect portrait mode
+  function isPortrait() {
+    return ($(window).width() < $(window).height());
+  }
+
+  // safely detect rendering on a tablet
+  function isTablet() {
+    try
+    {
+      return window.matchMedia("only screen and (min-width: 769px) and (max-width: 992px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  // test whether this is a shiny doc
+  function isShinyDoc() {
+    return (typeof(window.Shiny) !== "undefined" && !!window.Shiny.outputBindings);
+  }
+
+  // set flex using vendor specific prefixes
+  function setFlex(el, flex) {
+    el.css('-webkit-box-flex', flex)
+      .css('-webkit-flex', flex)
+      .css('-ms-flex', flex)
+      .css('flex', flex);
+  }
+
+  // support bookmarking of pages
+  function handleLocationHash() {
+
+    // restore tab/page from bookmark
+    var hash = window.decodeURIComponent(window.location.hash);
+    if (hash.length > 0) {
+      // Update the tab without .showPage() so that we don't change page history
+      $('ul.nav a[href="' + hash + '"]').tab('show');
+    }
+
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+      var hash = window.decodeURIComponent(window.location.hash);
+      var activeTab = $('ul.nav a[href="' + hash + '"]');
+      if (activeTab.length) {
+        activeTab.tab('show');
+      } else {
+        // returning to the base page URL without a hash activates first tab
+        $('ul.nav a:first').tab('show');
+      }
+    });
+
+    // add a hash to the URL when the user clicks on a tab/page
+    $('.navbar-nav a[data-toggle="tab"]').on('click', function(e) {
+      var baseUrl = FlexDashboardUtils.urlWithoutHash(window.location.href);
+      var hash = FlexDashboardUtils.urlHash($(this).attr('href'));
+      var href = baseUrl + hash;
+      FlexDashboardUtils.setLocation(href);
+    });
+
+    // handle clicks of other links that should activate pages
+    var navPages = $('ul.navbar-nav li a[data-toggle=tab]');
+    navPages.each(function() {
+      var href =  $(this).attr('href');
+      var links = $('a[href="' + href + '"][data-toggle!=tab]');
+      links.each(function() {
+        $(this).on('click', function(e) {
+          window.FlexDashboardUtils.showPage(href);
+        });
+      });
+    });
+  }
+
+  // tweak Prism highlighting
+  function initPrismHighlighting() {
+
+    if (window.Prism) {
+      Prism.languages.insertBefore('r', 'comment', {
+        'heading': [
+          {
+            // title 1
+        	  // =======
+
+        	  // title 2
+        	  // -------
+        	  pattern: /\w+.*(?:\r?\n|\r)(?:====+|----+)/,
+            alias: 'operator'
+          },
+          {
+            // ### title 3
+            pattern: /(^\s*)###[^#].+/m,
+            lookbehind: true,
+            alias: 'operator'
+          }
+        ]
+      });
+
+      // prism highlight
+      Prism.highlightAll();
+    }
+  }
+
+  FlexDashboard.prototype = {
+    constructor: FlexDashboard,
+    init: init,
+    isMobilePhone: isMobilePhone,
+    isFillPage: isFillPage
+  };
+
+  return FlexDashboard;
+
+})();
+
+// utils
+window.FlexDashboardUtils = {
+  resizableImage: function(img) {
+    var src = img.attr('src');
+    var url = 'url("' + src + '")';
+    img.parent().css('background', url)
+                .css('background-size', 'contain')
+                .css('background-repeat', 'no-repeat')
+                .css('background-position', 'center')
+                .addClass('image-container');
+  },
+  setLocation: function(href) {
+    if (history && history.pushState) {
+      history.pushState(null, null, href);
+    } else {
+      window.location.replace(href);
+    }
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 10);
+  },
+  showPage: function(href) {
+    $('ul.navbar-nav li a[href="' + href + '"]').tab('show');
+    var baseUrl = this.urlWithoutHash(window.location.href);
+    var loc = baseUrl + href;
+    this.setLocation(loc);
+  },
+  showLinkedValue: function(href) {
+    // check for a page link
+    if ($('ul.navbar-nav li a[data-toggle=tab][href="' + href + '"]').length > 0)
+      this.showPage(href);
+    else
+      window.open(href);
+  },
+  urlWithoutHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(0, hashLoc);
+    else
+      return url;
+  },
+  urlHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(hashLoc);
+    else
+      return "";
+  }
+};
+
+window.FlexDashboard = new FlexDashboard();
+
+// empty content
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    if (container.find('p').length == 0)
+      return container;
+    else
+      return $();
+  }
+})
+
+// plot image
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('p')
+                    .children('img:only-child');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// plot image (figure style)
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.figure').children('img');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// htmlwidget
+window.FlexDashboardComponents.push({
+
+  init: function(dashboardContainer) {
+    // trigger "shown" after initial layout to force static htmlwidgets
+    // in runtime: shiny to be resized after the dom has been transformed
+    dashboardContainer.on('flexdashboard:layoutcomplete', function(event) {
+      setTimeout(function() {
+        dashboardContainer.trigger('shown');
+      }, 200);
+    });
+  },
+
+  find: function(container) {
+    return container.children('div[id^="htmlwidget-"],div.html-widget');
+  }
+});
+
+// gauge
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.html-widget.gauge');
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+
+  }
+
+});
+
+// shiny output
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.children('div[class^="shiny-"]');
+  }
+});
+
+// bootstrap table
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    var bsTable = container.find('table.table');
+    if (bsTable.length !== 0)
+      return bsTable;
+    else
+      return container.find('tr.header').parent('thead').parent('table');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var bsTable = element;
+
+    // fixup xtable generated tables with a proper thead
+    var headerRow = bsTable.find('tbody > tr:first-child > th').parent();
+    if (headerRow.length > 0) {
+      var thead = $('<thead></thead>');
+      bsTable.prepend(thead);
+      headerRow.detach().appendTo(thead);
+    }
+
+    // improve appearance
+    container.addClass('bootstrap-table');
+
+    // for fill page provide scrolling w/ sticky headers
+    if (fillPage) {
+      // force scrollbar on overflow
+      container.addClass('flowing-content-shim');
+
+      // stable table headers when scrolling
+      bsTable.stickyTableHeaders({
+        scrollableArea: container
+      });
+    }
+  }
+});
+
+// embedded shiny app
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('iframe.shiny-frame');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage) {
+      element.attr('height', '100%');
+    } else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (!height)
+        height = element.attr('height');
+      if (!height)
+        element.attr('height', 500);
+    }
+  }
+});
+
+// shiny fillRow or fillCol
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('.flexfill-container');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage)
+      element.css('height', '100%');
+    else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (height === "100%" || height === "auto" || height === "initial" ||
+          height === "inherit" || !height) {
+        element.css('height', 500);
+      }
+    }
+  }
+});
+
+// valueBox
+window.FlexDashboardComponents.push({
+
+  type: "custom",
+
+  find: function(container) {
+    if (container.find('span.value-output, .shiny-valuebox-output').length)
+      return container;
+    else
+      return $();
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var chartTitle = title;
+    var valueBox = element;
+
+    // add value-box class to container
+    container.addClass('value-box');
+
+    // value paragraph
+    var value = $('<p class="value"></p>');
+
+    // if we have shiny-text-output then just move it in
+    var valueOutputSpan = [];
+    var shinyOutput = valueBox.find('.shiny-valuebox-output').detach();
+    if (shinyOutput.length) {
+      valueBox.children().remove();
+      shinyOutput.html("&mdash;");
+      value.append(shinyOutput);
+    } else {
+      // extract the value (remove leading vector index)
+      var chartValue = valueBox.text().trim();
+      chartValue = chartValue.replace("[1] ", "");
+      valueOutputSpan = valueBox.find('span.value-output').detach();
+      valueBox.children().remove();
+      value.text(chartValue);
+    }
+
+    // caption
+    var caption = $('<p class="caption"></p>');
+    caption.append(chartTitle);
+
+    // build inner div for value box and add it
+    var inner = $('<div class="inner"></div>');
+    inner.append(value);
+    inner.append(caption);
+    valueBox.append(inner);
+
+    // add icon if specified
+    var icon = $('<div class="icon"><i></i></div>');
+    valueBox.append(icon);
+    function setIcon(chartIcon) {
+      var iconLib = "";
+      var iconSplit = chartIcon.split(" ");
+      if (iconSplit.length > 1) {
+        iconLib = iconSplit[0];
+        chartIcon = iconSplit.slice(1).join(" ");
+      } else {
+        var components = chartIcon.split("-");
+        if (components.length > 1)
+          iconLib = components[0];
+      }
+      icon.children('i').attr('class', iconLib + ' ' + chartIcon);
+    }
+    var chartIcon = valueBox.attr('data-icon');
+    if (chartIcon)
+      setIcon(chartIcon);
+
+    // handle data attributes in valueOutputSpan
+    function handleValueOutput(valueOutput) {
+
+      // caption
+      var dataCaption = valueOutput.attr('data-caption');
+      if (dataCaption)
+        caption.html(dataCaption);
+
+      // icon
+      var dataIcon = valueOutput.attr('data-icon');
+      if (dataIcon)
+        setIcon(dataIcon);
+
+      // If valueBox(color=) was an accent color, this attr should
+      // be populated with the accent color and the relevant CSS comes
+      // in through HTML dependencies
+      var dataColorAccent = valueOutput.attr('data-color-accent');
+      var valueBoxClasses = "value-box-" + (["primary", "info", "danger", "warning", "success"].join(" value-box-"));
+      if (dataColorAccent) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.addClass('value-box-' + dataColorAccent);
+      }
+
+      // If valueBox(color=) was a CSS color, these other data-color-*
+      // attrs will be populated
+      var dataColor = valueOutput.attr('data-color');
+      if (dataColor) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.css('background-color', dataColor);
+      }
+      var dataColorText = valueOutput.attr('data-color-text');
+      if (dataColorText) {
+        valueBox.find(".inner").css('color', dataColorText);
+      }
+      var dataColorIcon = valueOutput.attr('data-color-icon');
+      if (dataColorIcon) {
+        valueBox.find(".icon").css('color', dataColorIcon);
+      }
+
+      // url
+      var dataHref = valueOutput.attr('data-href');
+      if (dataHref) {
+        valueBox.addClass('linked-value');
+        valueBox.off('click.value-box');
+        valueBox.on('click.value-box', function(e) {
+          window.FlexDashboardUtils.showLinkedValue(dataHref);
+        });
+      }
+    }
+
+    // check for a valueOutputSpan
+    if (valueOutputSpan.length > 0) {
+      handleValueOutput(valueOutputSpan);
+    }
+
+    // if we have a shinyOutput then bind a listener to handle
+    // new valueOutputSpan values
+    shinyOutput.on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+          var valueOutputSpan = element.find('span.value-output');
+          if (valueOutputSpan.length > 0)
+            handleValueOutput(valueOutputSpan);
+        }, 10);
+      }
+    );
+  }
+});
+</script>
+
+<div id="dashboard-container">
+
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+/* Barra superior */
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e8e2dc;
+  min-height: 85px;
+  padding: 15px 60px;
+}
+
+/* Logo o título */
+.navbar-brand {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 28px !important;
+  color: #222 !important;
+}
+
+/* Menú */
+.navbar-nav > li > a {
+  color: #222 !important;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding-top: 30px !important;
+}
+
+/* Opción activa */
+.navbar-nav > .active > a {
+  background: transparent !important;
+  color: #b99b6b !important;
+}
+
+/* Botón tipo “Consultar disponibilidad” */
+.navbar-nav > li:last-child > a {
+  border: 1px solid #333;
+  padding: 15px 25px !important;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+.section.level1 {
+    padding-top: 0px !important;
+    margin-top: -40px !important;
+}
+
+.chart-stage {
+    padding-top: 0 !important;
+}
+
+body {
+    margin-top: 0 !important;
+}
+</style>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+/*======================================
+forma de las fotos pagina principal
+======================================*/
+.historias{
+  background:#faf9f7;
+  text-align:center;
+  padding:60px 0 80px;
+}
+
+.subtitulo{
+  font-size:9px;
+  letter-spacing:4px;
+  color:#b99b6b;
+  margin-bottom:14px;
+}
+
+.historias h1{
+  font-family:Georgia, serif;
+  font-size:48px;
+  font-weight:400;
+  margin:0;
+  color:#111;
+}
+
+.historias h1 span{
+  color:#b99b6b;
+  font-style:italic;
+}
+
+.descripcion{
+  color:#999;
+  font-size:13px;
+  margin:18px 0 32px;
+}
+
+.mosaico{
+  width:98%;
+  max-width:none;
+  margin:auto;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.card{
+  position:relative;
+  height:700px;
+  overflow:hidden;
+  text-align:left;
+}
+
+.card.ancho{
+  height:650px;
+  margin-bottom:12px;
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.70), rgba(0,0,0,.05));
+}
+
+.card div{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  z-index:2;
+  color:white;
+}
+
+.card h3,
+.card h2{
+  font-family:Georgia, serif;
+  margin:0;
+}
+
+.card h3{
+  font-size:20px;
+}
+
+.card h2{
+  font-size:32px;
+}
+
+.card p{
+  margin:5px 0 0;
+  font-size:7px;
+  letter-spacing:1.4px;
+  font-weight:bold;
+}
+
+@media(max-width:700px){
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+
+  .card,
+  .card.ancho{
+    height:360px;
+  }
+
+  .historias h1{
+    font-size:38px;
+  }
+}
+
+
+
+.card-contacto{
+    background:#212422;
+    min-height:500px;
+    position:relative;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+    border:8px solid rgba(255,255,255,.2);
+}
+
+.card-contacto:hover{
+    background:#ae905d;
+    transform:scale(1.02);
+}
+
+.contacto-contenido{
+    text-align:center;
+    color:white;
+}
+
+.contacto-contenido h2{
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:42px;
+    margin-bottom:25px;
+}
+
+.contacto-contenido span{
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+</style>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+/* ===========================
+   LLAMADA A LA ACCIÓN
+=========================== */
+
+.cta-contacto{
+    padding:120px 20px;
+    text-align:center;
+    background:#faf9f7;
+}
+
+.cta-contacto h2{
+    font-family:Georgia, serif;
+    font-size:72px;
+    font-weight:400;
+    color:#111;
+    margin-bottom:45px;
+}
+
+.cta-contacto h2 span{
+    color:#b99b6b;
+    font-style:italic;
+}
+
+.btn-contacto{
+    display:inline-block;
+    background:#111;
+    color:white !important;
+    text-decoration:none;
+    padding:22px 55px;
+    letter-spacing:3px;
+    font-size:11px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-contacto:hover{
+    background:#333;
+    color:white !important;
+    text-decoration:none;
+}
+
+</style>
+<div id="historias" class="section level1">
+<h1>Historias</h1>
+<section class="historias">
+
+  <div class="subtitulo">CARTERA</div>
+  <h1><span>Historias</span> destacadas</h1>
+  <p class="descripcion">Algunos de mis favoritos recientes</p>
+
+  <div class="mosaico">
+
+    <div class="grid-3">
+      <div class="card"><img src="PNG/1.jpg"><div><h3>Sintia Nieto</h3><p>MIS 30 CUMPLEAÑOS · EL BOSQUE CARRETERA EL PRADO 4.7 KM</p></div></div>
+      <div class="card"><img src="PNG/2.jpg"><div><h3>Lili Patricia y Booz </h3><p>PREBODA· CENTRO ECOLÓGICO YACUMAMA</p></div></div>
+      <div class="card"><img src="PNG/3.jpeg"><div><h3>Danzas por Virgen de Candelaria</h3><p>DANZAS · MERCADO MODELO</p></div></div>
+    </div>
+
+    <div class="card ancho"><img src="PNG/4.jpEg"><div><h2>Certamen de Belleza</h2><p>MISS Y MISTER UNAMAD · COLICEO CERRADO DE MDD</p></div></div>
+
+    <div class="grid-3">
+      <div class="card"><img src="PNG/5.jpg"><div><h3>Certamen de Belleza</h3><p>MISS SAN JUAN 2025 · BOTAFOGO KM 7.8 DEL CORREDOR ECOTURÍSTICO</p></div></div>
+      <div class="card"><img src="PNG/6.jpeg"><div><h3>Cierre de Carnavales 2025</h3><p>PASACALLE · PLAZA PUERTO MALDONADO</p></div></div>
+      <div class="card"><img src="PNG/7.jpeg"><div><h3>Yicelia Maura</h3><p>MIS CUMPLEAÑOS 26 · MESON RESTAURANTE</p></div></div>
+    </div>
+
+    <div class="card ancho"><img src="PNG/8.jpeg"><div><h2>Halloween</h2><p>NOCHE DE MIEDO · PLAZA PUERTO MALDONADO</p></div></div>
+
+    <div class="grid-3">
+      <div class="card"><img src="PNG/9.jpeg"><div><h3>Danza todas las sangresa</h3><p>MISS DANZAS ANIVERSARIO DE PEM · PLAZA PUERTO MALDONADO</p></div></div>
+      <div class="card"><img src="PNG/10.jpeg"><div><h3>Show Politos mojados</h3><p>CACHIMBEADA IFMA · SALON DE EVENTOS ALAMEDA</p></div></div>
+      <div class="card"><img src="PNG/11.jpeg"><div><h3>Pamela Bravo</h3><p>MIS CUMPLEAÑOS · JR APURIMAC </p></div></div>
+    </div>
+    
+    <div class="card ancho"><img src="PNG/12.jpeg"><div><h2>Alessia</h2><p>MIS CUMPLEAÑOS 2 · PLAZA PUERTO MALDONADO</p></div></div>
+
+    <div class="grid-3">
+      <div class="card"><img src="PNG/13.jpeg"><div><h3>Gael</h3><p>MIS CUMPLEAÑOS 1 · AV. BRASIL PUERTO MALDONADO</p></div></div>
+      <div class="card"><img src="PNG/14.jpeg"><div><h3>Matias</h3><p>MIS CUMPLEAÑOS 28 · PROLONGACION TAMBOPATA</p></div></div>
+      <div class="card"><img src="PNG/15.jpg"><div><h3>Sara</h3><p>MIS CUMPLEAÑOS · 15 DE AGOSTO QUILLABAMBA </p></div></div>
+      </div>
+      
+    <div class="grid-3">
+      <div class="card"><img src="PNG/16.jpeg"><div><h3>Katy</h3><p>AMOR DE MADRE E HIJO · PLAZA MAYOR DE QUILLABAMBA</p></div></div>
+      <div class="card"><img src="PNG/17.jpeg"><div><h3>Victor y Jessica</h3><p>SUSTENTACION DE TESIS · UNAMAD</p></div></div>
+      <div class="card"><img src="PNG/18.jpg"><div><h3>Mikely y Aaron</h3><p>SUSTENTACION DE TESIS · UNAMAD </p></div></div>
+      </div>
+    
+    <div class="card ancho"><img src="PNG/19.jpeg"><div><h2>Roseane</h2><p>GRADUACION ESCOLAR · AUDITORIO UNAMAD</p></div></div>
+    
+    <div class="grid-3">
+      <div class="card"><img src="PNG/20.jpeg"><div><h3>Adriana y Amelia</h3><p>GRADUACION ESCOLAR · CASA BLANCA</p></div></div>
+      <div class="card"><img src="PNG/22.jpeg"><div><h3>Aniversario</h3><p>JORGE BASADRE GROHMAN · AV. TAMBOPATA</p></div></div>
+      <div class="card"><img src="PNG/23.jpeg"><div><h3>Inaguracion galeria</h3><p>GALERIA DE ARTE· AV. AEROPUERTO </p></div></div>
+      </div>
+      
+     <div class="card ancho"><img src="PNG/21.jpeg"><div><h2>Inaguracion</h2><p>APERTURA DE SALON · AV ALAMEDA CON UNIVERSITARIA</p></div></div>
+      
+      <div class="grid-3">
+      <div class="card"><img src="PNG/24.jpeg"><div><h3>Juliette</h3><p>MIS CUMPLEAÑOS 5 · CASA DE COLORES</p></div></div>
+      <div class="card"><img src="PNG/25.jpeg"><div><h3>Certamen de Belleza</h3><p>MISS Y MISTER IFMA · AUDITORIO UNAMAD</p></div></div>
+      <div class="card"><img src="PNG/26.jpg"><div><h3>Amor eterno</h3><p>ATARDECER DEL AMOR ·BOTAFOGO KM 7.8 DEL CORREDOR ECOTURÍSTICO </p></div></div>
+      </div>
+      
+    <div class="grid-3">
+      <div class="card"><img src="PNG/27.jpg"><div><h3>Yomira y Percy</h3><p>DULCE ESPERA DE GAEL · KM 14 EL RANCHO</p></div></div>
+      <div class="card"><img src="PNG/28.jpeg"><div><h3>Danza inagural</h3><p>DANZA TIPICA · EXPOAMAZONICA CEDEGA</p></div></div>
+      <div class="card"><img src="PNG/29.jpg"><div><h3>Motocros</h3><p>CONCURSO DE MOTOCROS · EXPOAMAZONICA CEDEGA</p></div></div>
+      </div>
+      
+  <div class="card ancho"><img src="PNG/30.png"><div><h2>Punta Cana</h2><p>PLAYA DEL CARIBE · ISLA SAONA</p></div></div>
+  
+      <div class="grid-3">
+      <div class="card"><img src="PNG/31.jpg"><div><h3>Certamen de Belleza</h3><p>MISS PLATANO DEL MANU · CAMPO FERIAL DEL MANU</p></div></div>
+      <div class="card"><img src="PNG/32.png"><div><h3>Certamen de Belleza</h3><p>MISS CARNABAL 2026 · AUDITORIO DEL PARQUE BOLOGNESI</p></div></div>
+      <div class="card"><img src="PNG/33.png"><div><h3>Dia del Administrador</h3><p>CEREMONIA DEL DIA DEL ADMINISTRADOR · TEOKAS </p></div></div>
+      </div>
+      
+  </div>
+</section>
+
+
+
+<div class="grid-3">
+
+  <div class="card"><img src="PNG/34.jpg"> <div> <h3>Día de la Música</h3> <p>CANTO Y DANZA · AUDITORIO DEL PARQUE BOLOGNESI</p></div>
+  </div>
+
+  <div class="card"> <img src="PNG/35.jpeg"><div><h3>Danzas típicas de PEM</h3><p>DANZA TÍPICA · PLAZA PUERTO MALDONADO</p></div>
+  </div>
+
+  <!-- TARJETA CONTACTO -->
+  <a href="#contacto" class="card-contacto">
+
+      <div class="contacto-contenido">
+          <h2>Tú eres el siguiente.</h2>
+          <span>PLANIFIQUÉMOSLO →</span>
+      </div>
+
+  </a>
+
+</div>
+
+
+
+<section class="cta-contacto">
+
+    <h2>
+        ¿Listo para crear <span>el tuyo?</span>
+    </h2>
+
+    <a href="#contacto" class="btn-contacto">
+        PONTE EN CONTACTO
+    </a>
+
+</section>
+
+<footer class="footer-gorcast">
+
+  <div class="footer-grid">
+
+    <div>
+      <h2>GorCastStudio</h2>
+      <p>Fotografía de eventos, cumpleaños, 15 años, dulce espera, compromisos y certámenes en Puerto Maldonado.</p>
+    </div>
+
+    <div>
+      <h4>NAVEGAR POR</h4>
+      <a href="#historias">Historias</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#acerca-de">Acerca de</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <div>
+      <h4>SERVICIOS</h4>
+      <a href="#paquetes">Cumpleaños</a>
+      <a href="#paquetes">15 años</a>
+      <a href="#paquetes">Dulce espera</a>
+      <a href="#paquetes">Compromisos</a>
+      <a href="#paquetes">Eventos sociales</a>
+    </div>
+
+    <div>
+      <h4>PONTE EN CONTACTO</h4>
+      <p>✉ gflorezc@unamad.edu.pe</p>
+      <p>☎ +51 958 154 521</p>
+      <p>📍 Puerto Maldonado, Perú</p>
+
+      <div class="footer-redes">
+  <a href="https://wa.me/51958154521" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://web.facebook.com/yordy.florez.1/" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://www.instagram.com/gorkiflorez/" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@gorky_97" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@gorkyflorez9065" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GorCastStudio. Todos los derechos reservados.</p>
+    <p>Desarrollado por Ing. Gorky Florez Castillo</p>
+  </div>
+
+</footer>
+
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+
+/*======================================
+titulo d e lso paquetes
+======================================*/
+.paquetes{
+  background:#faf9f7;
+  text-align:center;
+  padding:90px 20px 110px;
+}
+
+.paquetes h1{
+  font-family:Georgia, serif;
+  font-size:70px;
+  font-weight:400;
+  color:#111;
+  margin:0 0 35px;
+}
+
+.paquetes h1 span{
+  color:#b99b6b;
+  font-style:italic;
+}
+
+.tipos-paquetes{
+  font-size:11px;
+  letter-spacing:4px;
+  color:#555;
+  text-transform:uppercase;
+  margin-bottom:35px;
+}
+
+.incluye{
+  color:#8f8f8f;
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:70px;
+}
+
+.incluye::first-line{
+  color:#b99b6b;
+  letter-spacing:3px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.tabla-paquetes{
+  max-width:950px;
+  margin:auto;
+  background:white;
+  border:1px solid #ddd8cf;
+  padding:45px;
+}
+
+.tabla-titulo{
+  font-size:11px;
+  letter-spacing:4px;
+  color:#6f7780;
+  margin-bottom:35px;
+}
+
+.tabla-paquetes table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.tabla-paquetes th{
+  text-align:left;
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#777;
+  padding:18px 0;
+  font-weight:600;
+}
+
+.tabla-paquetes td{
+  text-align:left;
+  padding:22px 0;
+  border-top:1px solid #e5e0d8;
+  font-family:Georgia, serif;
+  font-size:18px;
+  color:#111;
+}
+
+.tabla-paquetes td:nth-child(2){
+  color:#b99b6b;
+}
+
+.nota-tabla{
+  color:#777;
+  font-size:13px;
+  margin-top:35px;
+}
+
+@media(max-width:700px){
+  .paquetes h1{
+    font-size:42px;
+  }
+
+  .tabla-paquetes{
+    padding:25px;
+    overflow-x:auto;
+  }
+
+  .tipos-paquetes{
+    line-height:2;
+  }
+}
+</style>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+
+/*======================================
+paquete cumpleñaos 
+======================================*/
+.planes-cumple{
+  background:#faf9f7;
+  text-align:center;
+  padding:80px 25px;
+}
+
+.planes-cumple h1{
+  font-family:Georgia, serif;
+  font-size:48px;
+  font-style:italic;
+  color:#b99b6b;
+}
+
+.intro{
+  color:#777;
+  max-width:650px;
+  margin:0 auto 45px;
+}
+
+.planes-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:35px;
+}
+
+.plan-card{
+  background:white;
+  border:1px solid #ddd8cf;
+  padding:55px 40px;
+  text-align:left;
+  position:relative;
+}
+
+.plan-card h2{
+  text-align:center;
+  font-family:Georgia, serif;
+  font-size:28px;
+}
+
+.precio{
+  text-align:center;
+  color:#b99b6b;
+  font-size:22px;
+  margin:15px 0 35px;
+}
+
+.detalle{
+  text-align:center;
+  font-size:10px;
+  letter-spacing:3px;
+  color:#777;
+  border-top:1px solid #ddd;
+  padding-top:25px;
+}
+
+.plan-card li{
+  margin:18px 0;
+  color:#666;
+}
+
+.plan-card li::marker{
+  color:#b99b6b;
+}
+
+.plan-card a{
+  display:block;
+  text-align:center;
+  margin-top:35px;
+  padding:18px;
+  border:1px solid #111;
+  color:#111;
+  text-decoration:none;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.destacado{
+  background:#111;
+  color:white;
+}
+
+.destacado h2,
+.destacado li{
+  color:white;
+}
+
+.destacado a{
+  background:#b99b6b;
+  color:white;
+  border:none;
+}
+
+.popular{
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#b99b6b;
+  color:white;
+  padding:12px 28px;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+
+
+.planes-evento{
+  background:#faf9f7;
+  text-align:center;
+  padding:80px 30px;
+}
+
+.planes-evento h1{
+  font-family:Georgia, serif;
+  font-size:46px;
+  font-style:italic;
+  font-weight:400;
+  color:#b99b6b;
+}
+
+.intro-evento{
+  max-width:650px;
+  margin:15px auto 50px;
+  color:#7d858c;
+  line-height:1.8;
+}
+
+.planes-evento-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:35px;
+}
+
+.plan-evento{
+  background:#fff;
+  border:1px solid #ddd8cf;
+  padding:55px 45px;
+  text-align:left;
+  position:relative;
+}
+
+.plan-evento h2{
+  text-align:center;
+  font-family:Georgia, serif;
+  font-size:28px;
+  font-weight:400;
+}
+
+.precio-evento{
+  text-align:center;
+  color:#777;
+  font-size:20px;
+  margin:18px 0 35px;
+}
+
+.detalle-evento{
+  text-align:center;
+  border-top:1px solid #ddd;
+  padding-top:25px;
+  font-size:10px;
+  letter-spacing:3px;
+  color:#777;
+}
+
+.plan-evento li{
+  margin:17px 0;
+  color:#697179;
+  line-height:1.6;
+}
+
+.plan-evento li::marker{
+  color:#b99b6b;
+}
+
+.plan-evento a{
+  display:block;
+  text-align:center;
+  margin-top:35px;
+  padding:18px;
+  border:1px solid #111;
+  color:#111;
+  text-decoration:none;
+  letter-spacing:2px;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.destacado-evento{
+  background:#111;
+}
+
+.destacado-evento h2{
+  color:#b99b6b;
+}
+
+.destacado-evento .precio-evento,
+.destacado-evento .detalle-evento,
+.destacado-evento li{
+  color:#d8d8d8;
+}
+
+.destacado-evento a{
+  background:#b99b6b;
+  color:white;
+  border:none;
+}
+
+.popular-evento{
+  position:absolute;
+  top:-15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#b99b6b;
+  color:white;
+  padding:10px 24px;
+  font-size:9px;
+  letter-spacing:2px;
+  font-weight:bold;
+}
+
+@media(max-width:800px){
+  .planes-evento-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+
+
+
+/* ==========================
+   PREGUNTAS
+========================== */
+
+.faq-contacto{
+    background:#faf9f7;
+    text-align:center;
+    padding:110px 20px;
+}
+
+.faq-contacto h2{
+    font-family:Georgia, serif;
+    font-size:64px;
+    font-weight:400;
+    margin-bottom:20px;
+    color:#111;
+}
+
+.faq-contacto h2 span{
+    color:#b99b6b;
+    font-style:italic;
+}
+
+.faq-contacto p{
+    color:#8d8d8d;
+    font-size:16px;
+    margin-bottom:40px;
+}
+
+.btn-faq{
+    display:inline-block;
+    background:#111;
+    color:white !important;
+    text-decoration:none;
+    padding:18px 45px;
+    font-size:10px;
+    letter-spacing:3px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-faq:hover{
+    background:#333;
+    color:white !important;
+    text-decoration:none;
+}
+</style>
+</div>
+<div id="paquetes" class="section level1">
+<h1>Paquetes</h1>
+<section class="paquetes">
+
+  <h1>Paquetes y <span>precios</span></h1>
+
+  <div class="tipos-paquetes">
+    CUMPLEAÑOS · 15 AÑOS · DULCE ESPERA · COMPROMISOS · CERTAMEN DE BELLEZA · EVENTOS SOCIALES
+  </div>
+
+  <p class="incluye">
+    CADA PAQUETE INCLUYE:<br>
+    Fotografías editadas · Galería digital · Asesoría previa · Entrega en alta resolución
+  </p>
+
+  <div class="tabla-paquetes">
+
+    <div class="tabla-titulo">DE UN VISTAZO</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Básico</th>
+          <th>Intermedio</th>
+          <th>Premium</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Cumpleaños</td>
+          <td>S/ 200</td>
+          <td>S/ 350</td>
+          <td>S/ 450</td>
+        </tr>
+
+        <tr>
+          <td>15 años</td>
+          <td>S/ 400</td>
+          <td>S/ 550</td>
+          <td>S/ 900</td>
+        </tr>
+
+        <tr>
+          <td>Dulce espera</td>
+          <td>S/ 300</td>
+          <td>S/ 400</td>
+          <td>S/ 500</td>
+        </tr>
+
+        <tr>
+          <td>Compromisos</td>
+          <td>S/ 350</td>
+          <td>S/ 550</td>
+          <td>S/ 800</td>
+        </tr>
+
+        <tr>
+          <td>Certamen de belleza</td>
+          <td>S/ 600</td>
+          <td>S/ 800</td>
+          <td>S/ 1,100</td>
+        </tr>
+
+        <tr>
+          <td>Eventos sociales</td>
+          <td>S/ 200</td>
+          <td>S/ 400</td>
+          <td>S/ 600</td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+
+    <p class="nota-tabla">
+      Cada paquete puede adaptarse según duración, locación y tipo de evento.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="planes-cumple">
+
+  <h1>Cumpleaños</h1>
+
+  <p class="intro">
+    Cada paquete incluye fotografías editadas, galería digital y entrega en alta resolución.
+  </p>
+
+  <div class="planes-grid">
+
+    <div class="plan-card">
+      <h2>Básico</h2>
+      <div class="precio">S/ 200</div>
+      <div class="detalle">1 HORA · 50+ FOTOS</div>
+      <ul>
+        <li>Cobertura del cumpleaños</li>
+        <li>Fotos espontáneas y familiares</li>
+        <li>Galería digital</li>
+        <li>Entrega en 4 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Básico%20de%20cumpleaños" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-card destacado">
+      <div class="popular">MÁS POPULAR</div>
+      <h2>Intermedio</h2>
+      <div class="precio">S/ 350</div>
+      <div class="detalle">2 HORAS · 80+ FOTOS</div>
+      <ul>
+        <li>Cobertura principal del evento</li>
+        <li>Fotos con familia e invitados</li>
+        <li>Retratos del cumpleañero/a</li>
+        <li>Galería digital en alta resolución</li>
+        <li>Entrega en 2 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Intermedio%20de%20cumpleaños" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-card">
+      <h2>Premium</h2>
+      <div class="precio">S/ 450</div>
+      <div class="detalle">4 HORAS · 120+ FOTOS</div>
+      <ul>
+        <li>Cobertura completa del cumpleaños</li>
+        <li>Sesión previa del cumpleañero/a</li>
+        <li>Fotos de decoración, torta y detalles</li>
+        <li>Retratos familiares e invitados</li>
+        <li>Entrega prioritaria en 1 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Premium%20de%20cumpleaños" target="_blank">COMIENCE</a>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+<section class="planes-evento">
+
+  <h1>15 años</h1>
+
+  <p class="intro-evento">
+    Cada sesión incluye asesoría previa, fotografías editadas en alta resolución,
+    galería digital y cobertura profesional del evento.
+  </p>
+
+  <div class="planes-evento-grid">
+
+    <div class="plan-evento">
+      <h2>Básico</h2>
+      <div class="precio-evento">S/ 400</div>
+      <div class="detalle-evento">2 HORAS · MÁS DE 35 IMÁGENES</div>
+      <ul>
+        <li>Sesión principal de la quinceañera</li>
+        <li>1 ubicación</li>
+        <li>Fotos individuales y familiares</li>
+        <li>Fotografías editadas en alta resolución</li>
+        <li>Galería digital</li>
+        <li>Entrega en 7 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20La%20sesión%20de%2015%20años%20Basico" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-evento destacado-evento">
+      <div class="popular-evento">MÁS POPULAR</div>
+      <h2>Intermedio</h2>
+      <div class="precio-evento">S/ 550</div>
+      <div class="detalle-evento">3 HORAS · MÁS DE 60 IMÁGENES</div>
+      <ul>
+        <li>Cobertura de ingreso y ceremonia</li>
+        <li>Fotos con familia e invitados</li>
+        <li>Detalles de decoración, torta y mesa principal</li>
+        <li>Retratos de la quinceañera</li>
+        <li>Galería digital en alta resolución</li>
+        <li>Entrega en 5 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20El%20evento%20de%2015%20años%20Intermedio" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-evento">
+      <h2>Premium</h2>
+      <div class="precio-evento">S/ 900</div>
+      <div class="detalle-evento">5 HORAS · MÁS DE 100 IMÁGENES</div>
+      <ul>
+        <li>Cobertura completa del evento</li>
+        <li>Sesión previa de la quinceañera</li>
+        <li>Fotos de ceremonia, baile y recepción</li>
+        <li>Retratos familiares e invitados</li>
+        <li>Entrega prioritaria</li>
+        <li>Galería digital premium</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Premium%20de%2015%20años%20Premium" target="_blank">COMIENCE</a>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+<section class="planes-evento">
+
+  <h1>Dulce espera</h1>
+
+  <p class="intro-evento">
+    Cada sesión incluye asesoría previa, dirección durante la sesión,
+    fotografías editadas en alta resolución, galería digital y entrega profesional.
+  </p>
+
+  <div class="planes-evento-grid">
+
+    <!-- PLAN 1 -->
+    <div class="plan-evento">
+      <h2>La sesión</h2>
+
+      <div class="precio-evento">S/ 300</div>
+
+      <div class="detalle-evento">
+        60 MINUTOS · MÁS DE 20 IMÁGENES
+      </div>
+
+      <ul>
+        <li>1 locación</li>
+        <li>Sesión individual de maternidad</li>
+        <li>Dirección de poses</li>
+        <li>Asesoría de vestuario</li>
+        <li>20 fotografías editadas</li>
+        <li>Galería digital privada</li>
+        <li>Entrega en 7 días</li>
+      </ul>
+
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20La%20Sesión%20de%20Dulce%20Espera" target="_blank">
+        COMIENCE
+      </a>
+    </div>
+
+    <!-- PLAN 2 -->
+    <div class="plan-evento destacado-evento">
+
+      <div class="popular-evento">
+        MÁS POPULAR
+      </div>
+
+      <h2>Mamá y familia</h2>
+
+      <div class="precio-evento">
+        S/ 400
+      </div>
+
+      <div class="detalle-evento">
+        90 MINUTOS · MÁS DE 40 IMÁGENES
+      </div>
+
+      <ul>
+        <li>1 locación</li>
+        <li>Sesión con pareja e hijos</li>
+        <li>Cambios de vestuario</li>
+        <li>Asesoría personalizada</li>
+        <li>40 fotografías editadas</li>
+        <li>Galería digital HD</li>
+        <li>Entrega en 5 días</li>
+      </ul>
+
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Mamá%20y%20Familia%20de%20Dulce%20Espera" target="_blank">
+        COMIENCE
+      </a>
+
+    </div>
+
+    <!-- PLAN 3 -->
+    <div class="plan-evento">
+
+      <h2>La experiencia completa</h2>
+
+      <div class="precio-evento">
+        S/ 500
+      </div>
+
+      <div class="detalle-evento">
+        120 MINUTOS · MÁS DE 60 IMÁGENES
+      </div>
+
+      <ul>
+        <li>Hasta 2 locaciones</li>
+        <li>Sesión completa familiar</li>
+        <li>Múltiples cambios de vestuario</li>
+        <li>Fotografías artísticas de maternidad</li>
+        <li>60 fotografías editadas</li>
+        <li>Galería premium</li>
+        <li>Entrega prioritaria en 72 horas</li>
+      </ul>
+
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Experiencia%20Completa%20de%20Dulce%20Espera" target="_blank">
+        COMIENCE
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+<section class="planes-evento">
+
+  <h1>Compromisos</h1>
+
+  <p class="intro-evento">
+    Cada sesión incluye asesoría para la planificación, dirección durante la sesión,
+    fotografías editadas en alta resolución, galería digital y entrega profesional.
+  </p>
+
+  <div class="planes-evento-grid">
+
+    <!-- PLAN 1 -->
+    <div class="plan-evento">
+
+      <h2>La propuesta</h2>
+
+      <div class="precio-evento">
+        S/ 350
+      </div>
+
+      <div class="detalle-evento">
+        60 MINUTOS · MÁS DE 25 IMÁGENES
+      </div>
+
+      <ul>
+        <li>Cobertura de la propuesta</li>
+        <li>Asesoría previa para planificación</li>
+        <li>1 ubicación</li>
+        <li>Dirección durante la sesión</li>
+        <li>25 fotografías editadas</li>
+        <li>Galería digital privada</li>
+        <li>Entrega en 7 días</li>
+      </ul>
+
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20La%20Propuesta" target="_blank">
+        COMIENCE
+      </a>
+
+    </div>
+
+    <!-- PLAN 2 -->
+    <div class="plan-evento destacado-evento">
+
+      <div class="popular-evento">
+        MÁS POPULAR
+      </div>
+
+      <h2>Propuesta + Retratos</h2>
+
+      <div class="precio-evento">
+        S/ 550
+      </div>
+
+      <div class="detalle-evento">
+        90 MINUTOS · MÁS DE 50 IMÁGENES
+      </div>
+
+      <ul>
+        <li>Cobertura completa de la propuesta</li>
+        <li>Sesión posterior de retratos</li>
+        <li>Asesoría de locación y horario</li>
+        <li>Fotografías espontáneas y dirigidas</li>
+        <li>50 fotografías editadas</li>
+        <li>Galería digital HD</li>
+        <li>Entrega en 5 días</li>
+      </ul>
+
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Propuesta%20y%20Retratos" target="_blank">
+        COMIENCE
+      </a>
+
+    </div>
+
+    <!-- PLAN 3 -->
+    <div class="plan-evento">
+
+      <h2>La experiencia completa</h2>
+
+      <div class="precio-evento">
+        S/ 800
+      </div>
+
+      <div class="detalle-evento">
+        120 MINUTOS · MÁS DE 80 IMÁGENES
+      </div>
+
+      <ul>
+        <li>Hasta 2 ubicaciones</li>
+        <li>Cobertura completa del compromiso</li>
+        <li>Sesión de retratos posterior</li>
+        <li>Fotografías familiares y de celebración</li>
+        <li>80 fotografías editadas</li>
+        <li>Galería premium en línea</li>
+        <li>Entrega prioritaria en 72 horas</li>
+      </ul>
+
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Experiencia%20Completa%20de%20Compromiso" target="_blank">
+        COMIENCE
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+<section class="planes-evento">
+
+  <h1>Certamen de belleza</h1>
+
+  <p class="intro-evento">
+    Cada cobertura incluye fotografías editadas en alta resolución, registro de pasarela,
+    retratos de candidatas, detalles del escenario y galería digital.
+  </p>
+
+  <div class="planes-evento-grid">
+
+    <div class="plan-evento">
+      <h2>Cobertura básica</h2>
+      <div class="precio-evento">S/ 600</div>
+      <div class="detalle-evento">2 HORAS · MÁS DE 50 IMÁGENES</div>
+      <ul>
+        <li>Cobertura de la pasarela principal</li>
+        <li>Fotos individuales de candidatas</li>
+        <li>Registro del escenario</li>
+        <li>50 fotografías editadas</li>
+        <li>Galería digital</li>
+        <li>Entrega en 7 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Cobertura%20Básica%20de%20Certamen%20de%20Belleza" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-evento destacado-evento">
+      <div class="popular-evento">MÁS POPULAR</div>
+      <h2>Pasarela + Backstage</h2>
+      <div class="precio-evento">S/ 800</div>
+      <div class="detalle-evento">3 HORAS · MÁS DE 80 IMÁGENES</div>
+      <ul>
+        <li>Cobertura de pasarela y presentación</li>
+        <li>Backstage y preparación de candidatas</li>
+        <li>Retratos individuales</li>
+        <li>Fotos de jurado, público y escenario</li>
+        <li>80 fotografías editadas</li>
+        <li>Entrega en 5 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Pasarela%20y%20Backstage%20de%20Certamen%20de%20Belleza" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-evento">
+      <h2>Cobertura completa</h2>
+      <div class="precio-evento">S/ 1,100</div>
+      <div class="detalle-evento">5 HORAS · MÁS DE 120 IMÁGENES</div>
+      <ul>
+        <li>Cobertura total del certamen</li>
+        <li>Pasarela, backstage y premiación</li>
+        <li>Retratos oficiales de candidatas</li>
+        <li>Fotos de organización, jurado y público</li>
+        <li>120 fotografías editadas</li>
+        <li>Entrega prioritaria en 72 horas</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Cobertura%20Completa%20de%20Certamen%20de%20Belleza" target="_blank">COMIENCE</a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="planes-evento">
+
+  <h1>Eventos sociales</h1>
+
+  <p class="intro-evento">
+    Cada cobertura incluye fotografías editadas en alta resolución, registro de momentos importantes,
+    fotos de invitados, detalles del evento y galería digital.
+  </p>
+
+  <div class="planes-evento-grid">
+
+    <div class="plan-evento">
+      <h2>Cobertura básica</h2>
+      <div class="precio-evento">S/ 200</div>
+      <div class="detalle-evento">1 HORA · MÁS DE 20 IMÁGENES</div>
+      <ul>
+        <li>Cobertura general del evento</li>
+        <li>Fotos de invitados principales</li>
+        <li>Registro de decoración y ambiente</li>
+        <li>20 fotografías editadas</li>
+        <li>Galería digital</li>
+        <li>Entrega en 7 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Cobertura%20Básica%20de%20Eventos%20Sociales" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-evento destacado-evento">
+      <div class="popular-evento">MÁS POPULAR</div>
+      <h2>Evento especial</h2>
+      <div class="precio-evento">S/ 400</div>
+      <div class="detalle-evento">2 HORAS · MÁS DE 45 IMÁGENES</div>
+      <ul>
+        <li>Cobertura de momentos principales</li>
+        <li>Fotos espontáneas y dirigidas</li>
+        <li>Retratos de invitados y anfitriones</li>
+        <li>45 fotografías editadas</li>
+        <li>Galería digital HD</li>
+        <li>Entrega en 5 días</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Evento%20Especial%20de%20Eventos%20Sociales" target="_blank">COMIENCE</a>
+    </div>
+
+    <div class="plan-evento">
+      <h2>Cobertura completa</h2>
+      <div class="precio-evento">S/ 600</div>
+      <div class="detalle-evento">4 HORAS · MÁS DE 80 IMÁGENES</div>
+      <ul>
+        <li>Cobertura completa del evento</li>
+        <li>Fotos de protocolo, invitados y detalles</li>
+        <li>Registro de decoración, brindis y momentos clave</li>
+        <li>80 fotografías editadas</li>
+        <li>Galería digital premium</li>
+        <li>Entrega prioritaria en 72 horas</li>
+      </ul>
+      <a href="https://wa.me/51958154521?text=Hola,%20quiero%20información%20del%20paquete%20Cobertura%20Completa%20de%20Eventos%20Sociales" target="_blank">COMIENCE</a>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section class="faq-contacto">
+
+    <h2>
+        ¿Tienes <span>preguntas</span>?
+    </h2>
+
+    <p>
+        Con gusto te ayudaré a elegir el paquete adecuado.
+    </p>
+
+    <a href="#contacto" class="btn-faq">
+        PLANIFIQUÉMOSLO
+    </a>
+
+</section>
+
+<footer class="footer-gorcast">
+
+  <div class="footer-grid">
+
+    <div>
+      <h2>GorCastStudio</h2>
+      <p>Fotografía de eventos, cumpleaños, 15 años, dulce espera, compromisos y certámenes en Puerto Maldonado.</p>
+    </div>
+
+    <div>
+      <h4>NAVEGAR POR</h4>
+      <a href="#historias">Historias</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#acerca-de">Acerca de</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <div>
+      <h4>SERVICIOS</h4>
+      <a href="#paquetes">Cumpleaños</a>
+      <a href="#paquetes">15 años</a>
+      <a href="#paquetes">Dulce espera</a>
+      <a href="#paquetes">Compromisos</a>
+      <a href="#paquetes">Eventos sociales</a>
+    </div>
+
+    <div>
+      <h4>PONTE EN CONTACTO</h4>
+      <p>✉ gflorezc@unamad.edu.pe</p>
+      <p>☎ +51 958 154 521</p>
+      <p>📍 Puerto Maldonado, Perú</p>
+
+      <div class="footer-redes">
+  <a href="https://wa.me/51958154521" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://web.facebook.com/yordy.florez.1/" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://www.instagram.com/gorkiflorez/" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@gorky_97" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@gorkyflorez9065" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GorCastStudio. Todos los derechos reservados.</p>
+    <p>Desarrollado por Ing. Gorky Florez Castillo</p>
+  </div>
+
+</footer>
+
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+/* =========================
+   ACERCA DE
+========================= */
+
+.acerca{
+    background:#faf9f7;
+    padding:100px 8%;
+}
+
+.acerca-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:80px;
+    align-items:center;
+    max-width:1400px;
+    margin:auto;
+}
+
+.subtitulo{
+    color:#b99b6b;
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:20px;
+}
+
+.acerca-texto h1{
+    font-family:Georgia, serif;
+    font-size:72px;
+    font-weight:400;
+    margin-bottom:20px;
+}
+
+.acerca-texto h1 span{
+    color:#b99b6b;
+    font-style:italic;
+}
+
+.profesion{
+    font-size:20px;
+    color:#999;
+    margin-bottom:45px;
+}
+
+.acerca-texto p{
+    font-size:20px;
+    line-height:2;
+    color:#666;
+    margin-bottom:28px;
+}
+
+.acerca-foto img{
+    width:100%;
+    height:850px;
+    object-fit:cover;
+}
+
+/* =========================
+   CTA FINAL
+========================= */
+
+.fecha-contacto{
+    text-align:center;
+    padding:120px 20px;
+    background:#faf9f7;
+}
+
+.fecha-contacto h2{
+    font-family:Georgia, serif;
+    font-size:64px;
+    font-weight:400;
+    margin-bottom:35px;
+}
+
+.fecha-contacto h2 span{
+    color:#b99b6b;
+    font-style:italic;
+}
+
+.btn-fecha{
+    display:inline-block;
+    background:#111;
+    color:white !important;
+    text-decoration:none;
+    padding:20px 50px;
+    letter-spacing:3px;
+    font-size:11px;
+    margin-bottom:30px;
+}
+
+.btn-fecha:hover{
+    color:white !important;
+    text-decoration:none;
+}
+
+.fecha-contacto p{
+    color:#888;
+    font-size:15px;
+}
+
+@media(max-width:1000px){
+
+    .acerca-grid{
+        grid-template-columns:1fr;
+    }
+
+    .acerca-texto h1{
+        font-size:52px;
+    }
+
+    .acerca-foto img{
+        height:500px;
+    }
+
+}
+
+</style>
+</div>
+<div id="acerca-de" class="section level1">
+<h1>Acerca de</h1>
+<section class="acerca">
+
+  <div class="acerca-grid">
+
+    <div class="acerca-texto">
+
+      <div class="subtitulo">ACERCA DE</div>
+
+      <h1>
+        Hola, soy <span>Gorky.</span>
+      </h1>
+
+      <p class="profesion">
+        Fotógrafo y creador de contenido en Puerto Maldonado
+      </p>
+
+      <p>
+        Me especializo en fotografía de cumpleaños, quinceañeros,
+        dulce espera, compromisos, certámenes de belleza y eventos sociales,
+        capturando emociones reales y momentos inolvidables.
+      </p>
+
+      <p>
+        Mi estilo busca retratar cada historia de forma auténtica,
+        combinando creatividad, iluminación y composición para generar
+        recuerdos que perduren en el tiempo.
+      </p>
+
+      <p>
+        Desde pequeños encuentros familiares hasta grandes celebraciones,
+        acompaño cada evento con profesionalismo y cercanía para que
+        disfrutes cada instante mientras yo me encargo de conservarlo.
+      </p>
+
+      <p>
+        Mi objetivo no es solo tomar fotografías, sino contar historias
+        que reflejen la esencia de cada persona y cada celebración.
+      </p>
+
+    </div>
+
+    <div class="acerca-foto">
+      <img src="PNG/36.png">
+    </div>
+
+  </div>
+
+</section>
+
+<section class="fecha-contacto">
+
+  <h2>
+    ¿Tienes alguna fecha en <span>mente?</span>
+  </h2>
+
+  <a href="#contacto" class="btn-fecha">
+      PLANIFIQUÉMOSLO
+  </a>
+
+  <p>
+    O escríbeme directamente al WhatsApp
+    <strong>+51 958 154 521</strong>
+  </p>
+
+</section>
+<footer class="footer-gorcast">
+
+  <div class="footer-grid">
+
+    <div>
+      <h2>GorCastStudio</h2>
+      <p>Fotografía de eventos, cumpleaños, 15 años, dulce espera, compromisos y certámenes en Puerto Maldonado.</p>
+    </div>
+
+    <div>
+      <h4>NAVEGAR POR</h4>
+      <a href="#historias">Historias</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#acerca-de">Acerca de</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <div>
+      <h4>SERVICIOS</h4>
+      <a href="#paquetes">Cumpleaños</a>
+      <a href="#paquetes">15 años</a>
+      <a href="#paquetes">Dulce espera</a>
+      <a href="#paquetes">Compromisos</a>
+      <a href="#paquetes">Eventos sociales</a>
+    </div>
+
+    <div>
+      <h4>PONTE EN CONTACTO</h4>
+      <p>✉ gflorezc@unamad.edu.pe</p>
+      <p>☎ +51 958 154 521</p>
+      <p>📍 Puerto Maldonado, Perú</p>
+
+      <div class="footer-redes">
+  <a href="https://wa.me/51958154521" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://web.facebook.com/yordy.florez.1/" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://www.instagram.com/gorkiflorez/" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@gorky_97" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@gorkyflorez9065" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GorCastStudio. Todos los derechos reservados.</p>
+    <p>Desarrollado por Ing. Gorky Florez Castillo</p>
+  </div>
+
+</footer>
+
+</div>
+<div id="galeria" class="section level1">
+<h1>Galeria</h1>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+
+
+/* ===================================
+   PORTADA GALERÍA
+=================================== */
+
+.hero-galeria{
+    position:relative;
+    width:100%;
+    height:420px;
+
+    background-image:url("PNG/37.png");
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+
+    overflow:hidden;
+}
+
+.overlay-galeria{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.45),
+        rgba(0,0,0,.35)
+    );
+}
+
+.contenido-galeria{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:2;
+}
+
+.contenido-galeria h1{
+    color:white;
+    font-family:Georgia, serif;
+    font-size:120px;
+    font-weight:400;
+    line-height:1;
+    text-align:center;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .hero-galeria{
+        height:280px;
+    }
+
+    .contenido-galeria h1{
+        font-size:60px;
+    }
+
+}
+
+
+
+/* ==========================
+   TEXTO BAJO GALERIA
+========================== */
+
+.intro-galeria{
+    max-width:1200px;
+    margin:90px auto;
+    text-align:center;
+    padding:0 40px;
+}
+
+.intro-galeria h2{
+    font-family:Georgia, serif;
+    font-size:72px;
+    font-weight:700;
+    line-height:1.15;
+    color:#111;
+    margin-bottom:30px;
+}
+
+.intro-galeria p{
+    max-width:1100px;
+    margin:auto;
+    font-size:22px;
+    line-height:1.8;
+    color:#555;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .intro-galeria h2{
+        font-size:42px;
+    }
+
+    .intro-galeria p{
+        font-size:18px;
+    }
+
+}
+
+/* =====================================
+   GALERIA PROFESIONAL 4 COLUMNAS
+===================================== */
+
+.galeria-mosaico{
+    background:#faf9f7;
+    padding:50px 4%;
+}
+
+.masonry-gallery{
+
+    column-count:4;
+    column-gap:12px;
+
+    max-width:1800px;
+    margin:auto;
+}
+
+.masonry-gallery img{
+
+    width:100%;
+    height:auto;
+
+    margin-bottom:12px;
+
+    display:block;
+
+    break-inside:avoid;
+
+    transition:.4s ease;
+
+    cursor:pointer;
+}
+
+.masonry-gallery img:hover{
+
+    transform:scale(1.02);
+    opacity:.95;
+
+}
+
+/* Tablets */
+
+@media(max-width:1200px){
+
+    .masonry-gallery{
+        column-count:3;
+    }
+
+}
+
+/* Celulares */
+
+@media(max-width:800px){
+
+    .masonry-gallery{
+        column-count:2;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .masonry-gallery{
+        column-count:1;
+    }
+
+}
+
+</style>
+<section class="hero-galeria">
+    <div class="overlay-galeria"></div>
+    <div class="contenido-galeria">
+        <h1>Nuestra Galería</h1>
+    </div>
+
+</section>
+<section class="intro-galeria"><h2>
+        Cumpleaños de Sintia por sus 30 años</h2><p>
+        "Treinta años de historia, sonrisas y sueños que apenas comienzan." 🌷📸
+    </p>
+</section>
+<section class="galeria-mosaico">
+
+  <div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Sintia/1.jpg">
+    <img class="vertical" src="PNG/Sintia/2.jpg">
+    <img class="vertical" src="PNG/Sintia/3.jpg">
+
+    <img class="horizontal" src="PNG/Sintia/4.jpg">
+    <img class="vertical" src="PNG/Sintia/5.jpg">
+    <img class="horizontal" src="PNG/Sintia/6.jpg">
+
+    <img class="vertical" src="PNG/Sintia/7.jpg">
+    <img class="horizontal" src="PNG/Sintia/8.jpg">
+    <img class="vertical" src="PNG/Sintia/9.jpg">
+
+    <img class="horizontal" src="PNG/Sintia/10.jpg">
+    <img class="vertical" src="PNG/Sintia/11.jpg">
+    <img class="horizontal" src="PNG/Sintia/12.jpg">
+
+  </div>
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Pre Boda de Lili Patricia y Booz</h2><p>
+        "Tenía el anillo, el plan y una serenidad que lo mantenía todo unido."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Lili/1.jpg">
+    <img class="vertical" src="PNG/Lili/2.jpg">
+    <img class="vertical" src="PNG/Lili/3.jpg">
+
+    <img class="horizontal" src="PNG/Lili/4.jpg">
+    <img class="vertical" src="PNG/Lili/5.jpg">
+    <img class="horizontal" src="PNG/Lili/6.jpg">
+
+    <img class="vertical" src="PNG/Lili/7.jpg">
+    <img class="horizontal" src="PNG/Lili/8.jpg">
+    <img class="vertical" src="PNG/Lili/9.jpg">
+
+    <img class="horizontal" src="PNG/Lili/10.jpg">
+    <img class="vertical" src="PNG/Lili/11.jpg">
+    <img class="horizontal" src="PNG/Lili/12.jpg">
+
+  </div>
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Danza por la Virgen de la Candelaria</h2><p>
+        "Tenía el anillo, el plan y una serenidad que lo mantenía todo unido."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Danza%20VC/1.jpeg">
+    <img class="vertical" src="PNG/Danza%20VC/2.jpeg">
+    <img class="vertical" src="PNG/Danza%20VC/3.jpeg">
+
+    <img class="horizontal" src="PNG/Danza%20VC/4.jpeg">
+    <img class="vertical" src="PNG/Danza%20VC/5.jpeg">
+    <img class="horizontal" src="PNG/Danza%20VC/6.jpeg">
+
+    <img class="vertical" src="PNG/Danza%20VC/7.jpeg">
+    <img class="horizontal" src="PNG/Danza%20VC/8.jpeg">
+    <img class="vertical" src="PNG/Danza%20VC/9.jpeg">
+
+    <img class="horizontal" src="PNG/Danza%20VC/10.jpeg">
+    <img class="vertical" src="PNG/Danza%20VC/11.jpeg">
+    <img class="horizontal" src="PNG/Danza%20VC/12.jpeg">
+
+  </div>
+  
+  
+
+
+</section>
+<section class="intro-galeria"><h2>
+        Miss y Mister UNAMAD 2025</h2><p>
+        "Más que un certamen, este evento celebró la identidad, el liderazgo y el espíritu de los estudiantes, destacando a jóvenes que inspiran y representan con orgullo a la Universidad Nacional Amazónica de Madre de Dios."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Miss%20UNAMAD/1.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/2.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/3.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/4.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/5.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/6.jpeg">
+
+    <img class="vertical" src="PNG/Miss%20UNAMAD/7.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/8.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/9.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/10.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/11.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/12.jpeg">
+
+    <img class="vertical" src="PNG/Miss%20UNAMAD/13.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/14.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/15.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/16.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/17.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/18.jpeg">
+
+    <img class="vertical" src="PNG/Miss%20UNAMAD/19.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/20.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/21.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/22.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/23.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/24.jpeg">
+    
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/25.jpeg">
+    <img class="vertical" src="PNG/Miss%20UNAMAD/26.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/27.jpeg">
+    <img class="horizontal" src="PNG/Miss%20UNAMAD/28.jpeg">
+  </div>
+  
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Miss San Juan 2025</h2><p>
+        "En una noche llena de color, alegría y orgullo regional, cada candidata representó el espíritu festivo de San Juan, convirtiendo este certamen en un homenaje a la identidad y riqueza cultural de nuestra Amazonía."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Miss%20San%20Juan/1.jpeg">
+    <img class="vertical" src="PNG/Miss%20San%20Juan/2.jpeg">
+    <img class="vertical" src="PNG/Miss%20San%20Juan/3.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/4.jpeg">
+    <img class="vertical" src="PNG/Miss%20San%20Juan/5.jpeg">
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/6.jpeg">
+
+    <img class="vertical" src="PNG/Miss%20San%20Juan/7.jpeg">
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/8.jpeg">
+    <img class="vertical" src="PNG/Miss%20San%20Juan/9.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/10.jpeg">
+    <img class="vertical" src="PNG/Miss%20San%20Juan/11.jpeg">
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/12.jpeg">
+
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/13.jpeg">
+    <img class="vertical" src="PNG/Miss%20San%20Juan/14.jpeg">
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/15.jpeg">
+    <img class="horizontal" src="PNG/Miss%20San%20Juan/16.jpeg">
+
+  </div>
+  
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Cierre de Carvanales 2025</h2><p>
+        "El Cierre de Carnavales 2025 fue una jornada llena de alegría, color y tradición, donde la música, la danza y el entusiasmo de los participantes marcaron el final de una de las festividades más esperadas del año."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Cierre%20Carnaval/1.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/2.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/3.jpeg">
+
+    <img class="horizontal" src="PNG/Cierre%20Carnaval/4.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/5.jpeg">
+    <img class="horizontal" src="PNG/Cierre%20Carnaval/6.jpeg">
+
+    <img class="vertical" src="PNG/Cierre%20Carnaval/7.jpeg">
+    <img class="horizontal" src="PNG/Cierre%20Carnaval/8.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/9.jpeg">
+
+    <img class="horizontal" src="PNG/Cierre%20Carnaval/10.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/11.jpeg">
+    <img class="horizontal" src="PNG/Cierre%20Carnaval/12.jpeg">
+
+    <img class="vertical" src="PNG/Cierre%20Carnaval/13.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/14.jpeg">
+    <img class="vertical" src="PNG/Cierre%20Carnaval/15.jpeg">
+
+    <img class="horizontal" src="PNG/Cierre%20Carnaval/16.jpeg">
+
+  </div>
+  
+  
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Cumpleñaos mis 26 años</h2><p>
+        "Mis 26 años fueron una celebración especial llena de alegría, gratitud y momentos inolvidables. Una etapa para valorar lo vivido, celebrar los logros alcanzados y seguir construyendo nuevos sueños junto a las personas que más quiero."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Cumple%20Yice/1.jpeg">
+    <img class="vertical" src="PNG/Cumple%20Yice/2.jpeg">
+    <img class="vertical" src="PNG/Cumple%20Yice/3.jpeg">
+
+    <img class="horizontal" src="PNG/Cumple%20Yice/4.jpeg">
+    <img class="vertical" src="PNG/Cumple%20Yice/5.jpeg">
+    <img class="horizontal" src="PNG/Cumple%20Yice/6.jpeg">
+
+    <img class="vertical" src="PNG/Cumple%20Yice/7.jpeg">
+    <img class="horizontal" src="PNG/Cumple%20Yice/8.jpeg">
+    <img class="vertical" src="PNG/Cumple%20Yice/9.jpeg">
+
+    <img class="horizontal" src="PNG/Cumple%20Yice/10.jpeg">
+    <img class="vertical" src="PNG/Cumple%20Yice/11.jpeg">
+    <img class="horizontal" src="PNG/Cumple%20Yice/12.jpeg">
+
+
+  </div>
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Halloween en PEM</h2><p>
+        "Noche de Miedo en la Plaza de Armas de Puerto Maldonado fue una velada llena de diversión, creatividad y emoción, donde disfraces, personajes escalofriantes y un ambiente único se apoderaron de la ciudad."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Haloween/1.jpeg">
+    <img class="vertical" src="PNG/Haloween/2.jpeg">
+    <img class="vertical" src="PNG/Haloween/3.jpeg">
+
+    <img class="horizontal" src="PNG/Haloween/4.jpeg">
+    <img class="vertical" src="PNG/Haloween/5.jpeg">
+    <img class="horizontal" src="PNG/Haloween/6.jpeg">
+
+    <img class="vertical" src="PNG/Haloween/7.jpeg">
+    <img class="horizontal" src="PNG/Haloween/8.jpeg">
+    <img class="vertical" src="PNG/Haloween/9.jpeg">
+
+    <img class="horizontal" src="PNG/Haloween/10.jpeg">
+    <img class="vertical" src="PNG/Haloween/11.jpeg">
+    <img class="horizontal" src="PNG/Haloween/12.jpeg">
+
+    <img class="horizontal" src="PNG/Haloween/13.jpeg">
+    <img class="vertical" src="PNG/Haloween/14.jpeg">
+    <img class="horizontal" src="PNG/Haloween/15.jpeg">
+    <img class="horizontal" src="PNG/Haloween/16.jpeg">
+
+  </div>
+  
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Danzas todas las sangres</h2><p>
+        "Danzas Todas las Sangres es una celebración de la riqueza cultural del Perú, donde la música, el color y la tradición se unen para rendir homenaje a las diversas expresiones artísticas de nuestro país."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/1.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/2.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/3.jpeg">
+
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/4.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/5.jpeg">
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/6.jpeg">
+
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/7.jpeg">
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/8.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/9.jpeg">
+
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/10.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/11.jpeg">
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/12.jpeg">
+
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/13.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/14.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/15.jpeg">
+
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/16.jpeg">
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/17.jpeg">
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/18.jpeg">
+
+    <img class="vertical" src="PNG/Danza%20todas%20las%20sangres/19.jpeg">
+    <img class="horizontal" src="PNG/Danza%20todas%20las%20sangres/20.jpeg">
+
+  </div>
+  
+  
+  
+  
+   
+</section>
+<section class="intro-galeria"><h2>
+        Show Hot por Cachimbeada</h2><p>
+        "Una presentación llena de entretenimiento que hizo vibrar al público y dejó recuerdos inolvidables entre los asistentes."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Show%20Hot/1.jpeg">
+    <img class="vertical" src="PNG/Show%20Hot/2.jpeg">
+    <img class="vertical" src="PNG/Show%20Hot/3.jpeg">
+
+    <img class="horizontal" src="PNG/Show%20Hot/4.jpeg">
+    <img class="vertical" src="PNG/Show%20Hot/5.jpeg">
+    <img class="horizontal" src="PNG/Show%20Hot/6.jpeg">
+    <img class="horizontal" src="PNG/Show%20Hot/7.jpeg">
+    <img class="horizontal" src="PNG/Show%20Hot/8.jpeg">
+</div> 
+  
+  
+  
+  
+  
+</section>
+<section class="intro-galeria"><h2>
+        Cumpleaños Pamela Bravo</h2><p>
+        "El cumpleaños de Pamela Bravo fue una ocasión especial llena de alegría, sonrisas y momentos inolvidables. Rodeada de familiares y amigos, celebró un año más de vida compartiendo instantes únicos que quedarán guardados para siempre en el corazón y en cada fotografía."
+    </p>
+</section> 
+
+<div class="masonry-gallery">
+
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/1.jpeg">
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/2.jpeg">
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/3.jpeg">
+
+    <img class="horizontal" src="PNG/Cumplea%C3%B1os%20Pamela/4.jpeg">
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/5.jpeg">
+    <img class="horizontal" src="PNG/Cumplea%C3%B1os%20Pamela/6.jpeg">
+
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/7.jpeg">
+    <img class="horizontal" src="PNG/Cumplea%C3%B1os%20Pamela/8.jpeg">
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/9.jpeg">
+
+    <img class="horizontal" src="PNG/Cumplea%C3%B1os%20Pamela/10.jpeg">
+    <img class="vertical" src="PNG/Cumplea%C3%B1os%20Pamela/11.jpeg">
+    <img class="horizontal" src="PNG/Cumplea%C3%B1os%20Pamela/12.jpeg">
+
+  </div>
+  
+<footer class="footer-gorcast">
+
+  <div class="footer-grid">
+
+    <div>
+      <h2>GorCastStudio</h2>
+      <p>Fotografía de eventos, cumpleaños, 15 años, dulce espera, compromisos y certámenes en Puerto Maldonado.</p>
+    </div>
+
+    <div>
+      <h4>NAVEGAR POR</h4>
+      <a href="#historias">Historias</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#acerca-de">Acerca de</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <div>
+      <h4>SERVICIOS</h4>
+      <a href="#paquetes">Cumpleaños</a>
+      <a href="#paquetes">15 años</a>
+      <a href="#paquetes">Dulce espera</a>
+      <a href="#paquetes">Compromisos</a>
+      <a href="#paquetes">Eventos sociales</a>
+    </div>
+
+    <div>
+      <h4>PONTE EN CONTACTO</h4>
+      <p>✉ gflorezc@unamad.edu.pe</p>
+      <p>☎ +51 958 154 521</p>
+      <p>📍 Puerto Maldonado, Perú</p>
+
+      <div class="footer-redes">
+  <a href="https://wa.me/51958154521" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://web.facebook.com/yordy.florez.1/" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://www.instagram.com/gorkiflorez/" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@gorky_97" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@gorkyflorez9065" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GorCastStudio. Todos los derechos reservados.</p>
+    <p>Desarrollado por Ing. Gorky Florez Castillo</p>
+  </div>
+
+</footer>
+
+</div>
+<div id="contacto" class="section level1">
+<h1>Consultar disponibilidad</h1>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+
+/*======================================
+formulario de contacto
+======================================*/
+.contacto-section{
+  background:#faf9f7;
+  text-align:center;
+  padding:90px 20px 120px;
+}
+
+.contacto-section h1{
+  font-family:Georgia, serif;
+  font-size:62px;
+  font-weight:400;
+  color:#111;
+  margin-bottom:15px;
+}
+
+.contacto-section h1 span{
+  color:#b99b6b;
+  font-style:italic;
+}
+
+.contacto-desc,
+.contacto-info{
+  color:#8a8a8a;
+  font-size:14px;
+  line-height:1.8;
+}
+
+.form-contacto{
+  max-width:520px;
+  margin:45px auto 0;
+  background:white;
+  border:1px solid #ddd8cf;
+  padding:45px;
+  text-align:left;
+}
+
+.form-contacto label{
+  display:block;
+  font-size:10px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:18px 0 10px;
+  color:#111;
+  font-weight:bold;
+}
+
+.form-contacto input,
+.form-contacto select,
+.form-contacto textarea{
+  width:100%;
+  padding:17px;
+  border:1px solid #ddd8cf;
+  background:#faf9f7;
+  font-size:14px;
+  box-sizing:border-box;
+}
+
+.form-contacto textarea{
+  height:130px;
+  resize:vertical;
+}
+
+.form-contacto button,
+.btn-whatsapp{
+  display:block;
+  width:100%;
+  margin-top:25px;
+  padding:18px;
+  background:#111;
+  color:white !important;
+  border:none;
+  text-align:center;
+  text-decoration:none;
+  font-size:10px;
+  letter-spacing:3px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-whatsapp{
+  background:#25D366;
+}
+
+.form-contacto button:hover{
+  background:#333;
+}
+
+.btn-whatsapp:hover{
+  background:#1faa52;
+  text-decoration:none;
+}
+</style>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<style type="text/css">
+
+
+/*======================================
+pie de pagina
+======================================*/
+.footer-gorcast{
+  background:#111;
+  color:#aaa;
+  padding:80px 8% 35px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1.2fr;
+  gap:70px;
+  max-width:1500px;
+  margin:auto;
+}
+
+.footer-gorcast h2{
+  font-family:Georgia, serif;
+  font-style:italic;
+  font-size:48px;
+  color:white;
+  margin:0 0 25px;
+}
+
+.footer-gorcast h4{
+  color:#b99b6b;
+  font-size:10px;
+  letter-spacing:3px;
+  margin-bottom:22px;
+}
+
+.footer-gorcast p{
+  line-height:1.8;
+  font-size:14px;
+}
+
+.footer-gorcast a{
+  display:block;
+  color:#aaa;
+  text-decoration:none;
+  margin-bottom:13px;
+  font-size:14px;
+}
+
+.footer-gorcast a:hover{
+  color:#b99b6b;
+}
+
+.footer-redes{
+  display:flex;
+  gap:12px;
+  margin-top:25px;
+}
+
+.footer-redes a{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#b99b6b;
+  color:#111 !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.footer-redes a:hover{
+  background:white;
+}
+
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.12);
+  margin-top:70px;
+  padding-top:30px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+@media(max-width:900px){
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+  }
+}
+</style>
+
+<section id="contacto" class="contacto-section">
+
+  <h1>Planifiquemos tu <span>momento.</span></h1>
+
+  <p class="contacto-desc">
+    Suelo responder en un plazo de 24 horas.
+  </p>
+
+  <p class="contacto-info">
+    Escríbeme al WhatsApp <strong>958 154 521</strong><br>
+    Correo: <strong>gflorezc@unamad.edu.pe</strong>
+  </p>
+
+  <form class="form-contacto"
+        action="mailto:gflorezc@unamad.edu.pe"
+        method="post"
+        enctype="text/plain">
+
+    <label>Nombre</label>
+    <input type="text" name="Nombre" placeholder="Su nombre" required>
+
+    <label>Correo electrónico</label>
+    <input type="email" name="Correo" placeholder="tú@correo.com" required>
+
+    <label>Teléfono</label>
+    <input type="text" name="Telefono" placeholder="958 154 521">
+
+    <label>¿Qué estás planeando?</label>
+    <select name="Servicio" required>
+      <option value="">Seleccione una</option>
+      <option>Cumpleaños</option>
+      <option>15 años</option>
+      <option>Dulce espera</option>
+      <option>Compromisos</option>
+      <option>Certamen de belleza</option>
+      <option>Eventos sociales</option>
+    </select>
+
+    <label>Fecha del evento</label>
+    <input type="date" name="Fecha">
+
+    <label>Cuéntame sobre tus planes</label>
+    <textarea name="Mensaje" placeholder="Ideas de ubicación, horarios, cualquier pregunta..." required></textarea>
+
+    <button type="submit">ENVIAR MENSAJE</button>
+
+    <a class="btn-whatsapp"
+       href="https://wa.me/51958154521?text=Hola,%20quiero%20consultar%20sobre%20una%20sesión%20fotográfica"
+       target="_blank">
+       ESCRIBIR POR WHATSAPP
+    </a>
+
+  </form>
+
+</section>
+
+<footer class="footer-gorcast">
+
+  <div class="footer-grid">
+
+    <div>
+      <h2>GorCastStudio</h2>
+      <p>Fotografía de eventos, cumpleaños, 15 años, dulce espera, compromisos y certámenes en Puerto Maldonado.</p>
+    </div>
+
+    <div>
+      <h4>NAVEGAR POR</h4>
+      <a href="#historias">Historias</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#acerca-de">Acerca de</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <div>
+      <h4>SERVICIOS</h4>
+      <a href="#paquetes">Cumpleaños</a>
+      <a href="#paquetes">15 años</a>
+      <a href="#paquetes">Dulce espera</a>
+      <a href="#paquetes">Compromisos</a>
+      <a href="#paquetes">Eventos sociales</a>
+    </div>
+
+    <div>
+      <h4>PONTE EN CONTACTO</h4>
+      <p>✉ gflorezc@unamad.edu.pe</p>
+      <p>☎ +51 958 154 521</p>
+      <p>📍 Puerto Maldonado, Perú</p>
+
+      <div class="footer-redes">
+  <a href="https://wa.me/51958154521" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://web.facebook.com/yordy.florez.1/" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://www.instagram.com/gorkiflorez/" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@gorky_97" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@gorkyflorez9065" target="_blank">
+    <i class="fab fa-youtube"></i>
+  </a>
+
+</div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GorCastStudio. Todos los derechos reservados.</p>
+    <p>Desarrollado por Ing. Gorky Florez Castillo</p>
+  </div>
+
+</footer>
+
+</div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed table-sm');
+
+  // initialize mathjax
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  FlexDashboard.init({
+    fillPage: true,
+    orientation: "columns",
+    storyboard: false,
+    defaultFigWidth: 576,
+    defaultFigHeight: 460,
+    defaultFigWidthMobile: 360,
+    defaultFigHeightMobile: 460,
+    resize_reload: true
+  });
+  var navbar = $(".navbar").first();
+  var body = $("body").first();
+  var sidebar = $(".section.sidebar").first();
+  function addNavbarPadding() {
+    var navHeight = navbar.outerHeight();
+    body.css("padding-top", (navHeight + 8) + "px");
+    sidebar.css("top", navHeight + "px");
+    var resizeEvent = window.document.createEvent("UIEvents");
+    resizeEvent.initUIEvent("resize", true, false, window, 0);
+    window.dispatchEvent(resizeEvent);
+  }
+  if (!window.Shiny) setTimeout(addNavbarPadding, 100);
+  $(document).on("shiny:idle", function() {
+    setTimeout(addNavbarPadding, 50);
+  });
+});
+</script>
+
+</body>
+</html>
